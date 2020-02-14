@@ -70,7 +70,7 @@ GTSpotter >> fileReferencesBy: aSelector inContext: aSpotterContext usingFilter:
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterClipboardFor: aStep [
-	<spotterOrder: 90>
+"	<spotterOrder: 90>
 	^ aStep listProcessor
 		title: 'Clipboard History';
 		items: [ Clipboard default recentItems ];
@@ -80,7 +80,7 @@ GTSpotter >> spotterClipboardFor: aStep [
 		actLogic: [ :item :step |
 			step exit.
 			item asString inspect ];
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -96,13 +96,13 @@ GTSpotter >> spotterConcreteMethodFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterDirtyMonticelloPackagesFor: aStep [
-	<spotterOrder: 85>
+"	<spotterOrder: 85>
 	aStep listProcessor
 			allCandidates: [ MCWorkingCopy allManagers select: #modified ];
 			title: 'Dirty Monticello packages';
 			itemIcon: [ Smalltalk ui icons iconNamed: #dirtyPackageIcon ];
 			filter: self defaultFilterClass;
-			wantsToDisplayOnEmptyQuery: true
+			wantsToDisplayOnEmptyQuery: true"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -118,12 +118,12 @@ GTSpotter class >> spotterExtensionsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForCachedPlaygroundPagesFor: aStep [
-	<spotterOrder: 100>
+"	<spotterOrder: 100>
 	aStep listProcessor
 			allCandidates: [ GTPlayBook instance pages ];
 			title: 'Playground cached pages';
 			itemName: [ :page | page content asString contractTo: 100 ];
-			filter: self defaultFilterClass
+			filter: self defaultFilterClass"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -135,7 +135,7 @@ GTSpotter >> spotterForClassesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForDirectoriesFor: aStep [
-	<spotterOrder: 50>
+"	<spotterOrder: 50>
 	self flag: #specialFilter.
 	aStep listProcessor
 		title: 'Directories';
@@ -143,23 +143,23 @@ GTSpotter >> spotterForDirectoriesFor: aStep [
 		itemFilterName: [ :reference | reference basename ];
 		filter: GTFilterFileReference item: [ :filter :context | 
 			self fileReferencesBy: #directories inContext: context usingFilter: filter ];
-		wantsToDisplayOnEmptyQuery: false	
+		wantsToDisplayOnEmptyQuery: false	"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForExpressionsFor: aStep [
-	<spotterOrder: 1>
+"	<spotterOrder: 1>
 	self flag: #specialFilter.
 	aStep listProcessor
 		title: 'Calculator';
 		filter: GTNullFilter item: [ :filter :context | 
 			self evaluateExpressionInContext: context usingFilter: filter ];
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForFilesFor: aStep [
-	<spotterOrder: 40>
+"	<spotterOrder: 40>
 	self flag: #specialFilter.
 	aStep listProcessor
 		title: 'Files';
@@ -167,12 +167,12 @@ GTSpotter >> spotterForFilesFor: aStep [
 		itemFilterName: [ :reference | reference basename ];
 		filter: GTFilterFileReference item: [ :filter :context | 
 			self fileReferencesBy: #files inContext: context usingFilter: filter ];
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForGlobalVarsFor: aStep [
-	<spotterOrder: 40>
+"	<spotterOrder: 40>
 	aStep listProcessor
 			allCandidates: [ Smalltalk globals associations select:[:assoc | 
 			assoc value isBehavior not and:[ 
@@ -180,7 +180,7 @@ GTSpotter >> spotterForGlobalVarsFor: aStep [
 			title: 'Global variables';
 			itemName:[:global | global key ];
 			filter: self defaultFilterClass;
-			wantsToDisplayOnEmptyQuery: false
+			wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -211,7 +211,7 @@ GTSpotter >> spotterForMessagesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForMetacelloConfigurationsFor: aStep [
-	<spotterOrder: 86>
+"	<spotterOrder: 86>
 	aStep listProcessor
 			title: 'Metacello Configurations';
 			allCandidates: [ 
@@ -223,7 +223,7 @@ GTSpotter >> spotterForMetacelloConfigurationsFor: aStep [
 			itemName: [ :each | each configuration class name ];
 			itemIcon: [ Smalltalk ui icons iconNamed: #config ];
 			filter: self defaultFilterClass;
-			wantsToDisplayOnEmptyQuery: false
+			wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -313,8 +313,10 @@ GTSpotter >> spotterHistoryFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterImplementorsFor: aStep [
-"	<spotterOrder: 30>
-	self flag: #specialFilter.
+	<spotterOrder: 30>
+
+	aStep addProcessor: GTImplementorsProcessor new
+"	self flag: #specialFilter.
 	aStep listProcessor
 		title: 'Implementors';
 		filter: GTFilterImplementor item: [ :filter :context | 
@@ -325,13 +327,13 @@ GTSpotter >> spotterImplementorsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterStfxFor: aStep [
-	<spotterOrder: 30>
+"	<spotterOrder: 30>
 	self flag: #specialFilter.
 	^ aStep listProcessor
 		title: 'ws.stfx.eu';
 		filter: GTNullFilter item: [ :filter :context | 
 			(context textTrimmed beginsWith: 'http://ws.stfx.eu')
-				ifTrue: [ GTPlayPage loadFromPublishUrl: context textTrimmed thenDo: filter ] ]
+				ifTrue: [ GTPlayPage loadFromPublishUrl: context textTrimmed thenDo: filter ] ]"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
