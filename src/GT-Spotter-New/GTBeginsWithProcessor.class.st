@@ -2,7 +2,8 @@ Class {
 	#name : #GTBeginsWithProcessor,
 	#superclass : #Object,
 	#instVars : [
-		'order'
+		'order',
+		'filter'
 	],
 	#category : #'GT-Spotter-New'
 }
@@ -10,12 +11,12 @@ Class {
 { #category : #filtering }
 GTBeginsWithProcessor >> filterInContext: aSpotterContext [ 
 
-	| filter results |
-	aSpotterContext text ifEmpty: [ ^ self ].
+	| results |
+
+	(aSpotterContext text isEmpty) ifTrue: [ ^ self ].
 	
-	filter := BeginsWithFilter on: (GeneratorIterator on: self originalCollection).
 	filter filter: aSpotterContext text.
-	results := filter next: self maxResults.
+	results := filter get: self maxResults.
 	
 	aSpotterContext stream 
 		performSymbol: #addAllCandidates:in:
@@ -29,10 +30,30 @@ GTBeginsWithProcessor >> filterInContext: aSpotterContext [
 	
 ]
 
+{ #category : #filtering }
+GTBeginsWithProcessor >> initialize [
+
+	super initialize.
+	filter := self newFilter.
+
+]
+
 { #category : #configuration }
 GTBeginsWithProcessor >> maxResults [
 
 	^ 10
+]
+
+{ #category : #filtering }
+GTBeginsWithProcessor >> newFilter [
+
+	^ BeginsWithFilter on: self newIterator
+]
+
+{ #category : #filtering }
+GTBeginsWithProcessor >> newIterator [
+
+	^ GeneratorIterator on: self originalCollection
 ]
 
 { #category : #filtering }

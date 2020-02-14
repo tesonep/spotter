@@ -5,22 +5,37 @@ Class {
 }
 
 { #category : #acting }
-GTImplementorsProcessor >> actOn: aClass for: aGTSpotterStep [ 
+GTImplementorsProcessor >> actOn: aMethod for: aGTSpotterStep [ 
 
-	aClass browse.
+	aMethod browse.
 	aGTSpotterStep exit.
 ]
 
 { #category : #accessing }
 GTImplementorsProcessor >> keyBinding [
 	
-	^ nil
+	^ $m meta
+]
+
+{ #category : #filtering }
+GTImplementorsProcessor >> newFilter [
+
+	^ MethodSelectorBeginsWithFilter on: self newIterator
+]
+
+{ #category : #acting }
+GTImplementorsProcessor >> newIterator [
+
+	^ GeneratorBlockIterator
+		on: [ :aBlock | 
+			SystemNavigation default
+				allBehaviorsDo: [ :aClass | aClass methodsDo: aBlock ] ]
 ]
 
 { #category : #'as yet unclassified' }
-GTImplementorsProcessor >> objectForName: aName [
+GTImplementorsProcessor >> objectForName: aMethod [
 
-	^ RPackageOrganizer default packageNamed: aName ifAbsent: [ aName ]
+	^ aMethod
 		
 ]
 
@@ -40,5 +55,5 @@ GTImplementorsProcessor >> render: aPackage [
 
 { #category : #accessing }
 GTImplementorsProcessor >> title [
-	^ 'Packages'
+	^ 'Implementors'
 ]

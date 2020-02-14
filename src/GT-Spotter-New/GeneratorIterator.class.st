@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'collection',
-		'nextIndex',
 		'generator'
 	],
 	#category : #'GT-Spotter-New'
@@ -42,8 +41,7 @@ GeneratorIterator >> doNext: aGenerator [
 
 { #category : #accessing }
 GeneratorIterator >> initialize [
-
-	nextIndex := 1.
+	super initialize.
 	self reset
 ]
 

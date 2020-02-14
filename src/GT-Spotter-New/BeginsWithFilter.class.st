@@ -3,7 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'inner',
-		'text'
+		'text',
+		'previousResult',
+		'previousText'
 	],
 	#category : #'GT-Spotter-New'
 }
@@ -26,9 +28,35 @@ BeginsWithFilter >> atEnd [
 BeginsWithFilter >> filter: aNewFilter [
 
 	text := aNewFilter.
-	inner reset
 
 	
+]
+
+{ #category : #accessing }
+BeginsWithFilter >> get: numberOfResults [
+
+	| result |
+
+	(text asLowercase beginsWith: previousText asLowercase) ifFalse: [ 
+		inner reset. 
+		previousResult := OrderedCollection new ].
+	
+	previousText := text asLowercase.
+	result := previousResult select: [ :e | self isValid: e ].
+
+	(result size < numberOfResults) ifTrue: [  
+		result := result , (self next: (numberOfResults - result size)) ].
+
+	previousResult := result takeFirst: numberOfResults.
+	
+	^ previousResult.
+]
+
+{ #category : #accessing }
+BeginsWithFilter >> initialize [
+
+	previousResult := OrderedCollection new.
+	previousText := ''
 ]
 
 { #category : #accessing }
@@ -38,11 +66,17 @@ BeginsWithFilter >> inner: aStream [
 ]
 
 { #category : #accessing }
+BeginsWithFilter >> isValid: aValue [
+
+	^ aValue asLowercase beginsWith: text asLowercase
+]
+
+{ #category : #accessing }
 BeginsWithFilter >> next [
 	| value |
 	[ inner atEnd ]
 		whileFalse: [ value := inner next.
-			(value asLowercase beginsWith: text asLowercase)
+			(self isValid: value)
 				ifTrue: [ ^ value ] ].
 	^ nil
 ]

@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #acting }
-GTPackageProcessor >> actOn: aClass for: aGTSpotterStep [ 
+GTPackageProcessor >> actOn: aPackage for: aGTSpotterStep [ 
 
-	aClass browse.
+	aPackage browse.
 	aGTSpotterStep exit.
 ]
 
