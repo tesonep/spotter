@@ -85,13 +85,13 @@ GTSpotter >> spotterClipboardFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterConcreteMethodFor: aStep [
-    <spotterOrder: 30>
+"    <spotterOrder: 30>
 	self flag: #specialFilter.
 	^ aStep listProcessor
 		title: 'Methods';
 		filter: GTNullFilter item: [ :filter :context |
 			self concreteMethodsInContext: context usingFilter: filter ];
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -197,7 +197,7 @@ GTSpotter >> spotterForHelpTopicFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForMessagesFor: aStep [
-	<spotterOrder: 35>
+"	<spotterOrder: 35>
 
 	aStep listProcessor
 		title: 'Messages';
@@ -206,7 +206,7 @@ GTSpotter >> spotterForMessagesFor: aStep [
 		actLogic: [ :each :step|
 			step exit.
 			self systemNavigation browseAllImplementorsOf: each name ];		
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -235,18 +235,18 @@ GTSpotter >> spotterForPackagesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForPragmasFor: aStep [
-	<spotterOrder: 40>
+"	<spotterOrder: 40>
 	aStep listProcessor
 		allCandidates: [ Pragma allInstances collect: [ :e | e selector ] as: Set ];
 		title: 'Pragmas';
 		itemName: [ :pragma | pragma ];
 		filter: self defaultFilterClass;
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForReferencesFor: aStep [
-	<spotterOrder: 32>
+"	<spotterOrder: 32>
 	
 	aStep listProcessor
 		title: 'References';
@@ -254,7 +254,7 @@ GTSpotter >> spotterForReferencesFor: aStep [
 			self class environment at: context textTrimmed ifPresent: [ :class |  
 				SystemNavigation default allReferencesTo: class binding do: filter ] ];
 		keyBinding: $n shift meta;
-		itemName: [ :method | method gtDisplayString ]
+		itemName: [ :method | method gtDisplayString ]"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -270,7 +270,7 @@ GTSpotter >> spotterForRepositoriesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForSendersFor: aStep [
-	<spotterOrder: 31>
+"	<spotterOrder: 31>
 
 	aStep listProcessor
 		title: 'Senders';
@@ -279,12 +279,12 @@ GTSpotter >> spotterForSendersFor: aStep [
 				allSendersToString: context textTrimmed 
 				do: filter ];
 		keyBinding: $n meta;
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForStashedPlaygroundPagesFor: aStep [
-	<spotterOrder: 100>
+"	<spotterOrder: 100>
 	aStep listProcessor
 			allCandidates: [ 
 				| stashFiles |
@@ -295,7 +295,7 @@ GTSpotter >> spotterForStashedPlaygroundPagesFor: aStep [
 						title: (file basename copyUpTo: $-) ] ];
 			title: 'Playground named pages';
 			itemName: [ :page | page title, ' - ', page content asString contractTo: 100 ];
-			filter: self defaultFilterClass
+			filter: self defaultFilterClass"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -313,14 +313,14 @@ GTSpotter >> spotterHistoryFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterImplementorsFor: aStep [
-	<spotterOrder: 30>
+"	<spotterOrder: 30>
 	self flag: #specialFilter.
 	aStep listProcessor
 		title: 'Implementors';
 		filter: GTFilterImplementor item: [ :filter :context | 
 			SystemNavigation default allBehaviorsDo: [ :class | class methodsDo: filter ] ];
 		keyBinding: $m meta;
-		wantsToDisplayOnEmptyQuery: false
+		wantsToDisplayOnEmptyQuery: false"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -336,7 +336,7 @@ GTSpotter >> spotterStfxFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterWindowsFor: aStep [
-	<spotterOrder: 5>
+"	<spotterOrder: 5>
 
 	aStep listProcessor
 			title: 'Windows';
@@ -346,7 +346,7 @@ GTSpotter >> spotterWindowsFor: aStep [
 			itemIcon: [ :window | window taskbarIcon ];
 			sort:  [ :window1 :window2 | window1 label < window2 label ];
 			filter: GTFilterSubstring;
-		wantsToDisplayOnEmptyQuery: true
+		wantsToDisplayOnEmptyQuery: true"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
