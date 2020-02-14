@@ -47,7 +47,7 @@ GTBeginsWithProcessor >> maxResults [
 { #category : #filtering }
 GTBeginsWithProcessor >> newFilter [
 
-	^ BeginsWithFilter on: self newIterator
+	^ HasSubStringFilter on: self newIterator
 ]
 
 { #category : #filtering }

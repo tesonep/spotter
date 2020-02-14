@@ -20,7 +20,7 @@ GTImplementorsProcessor >> keyBinding [
 { #category : #filtering }
 GTImplementorsProcessor >> newFilter [
 
-	^ MethodSelectorBeginsWithFilter on: self newIterator
+	^ MethodSelectorHasSubstringFilter on: self newIterator
 ]
 
 { #category : #acting }
