@@ -42,7 +42,7 @@ BeginsWithFilter >> next [
 	| value |
 	[ inner atEnd ]
 		whileFalse: [ value := inner next.
-			(value beginsWith: text)
+			(value asLowercase beginsWith: text asLowercase)
 				ifTrue: [ ^ value ] ].
 	^ nil
 ]
