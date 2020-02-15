@@ -16,6 +16,12 @@ GTMockCandidatesList >> addAllCandidates: aCollection in: aProcessor [
 ]
 
 { #category : #adding }
+GTMockCandidatesList >> addObject: anObject inProcessor: aProcessor [
+
+	results add: anObject
+]
+
+{ #category : #adding }
 GTMockCandidatesList >> addObjects: aCollection inProcessor: aProcessor [
 
 	results addAll: aCollection

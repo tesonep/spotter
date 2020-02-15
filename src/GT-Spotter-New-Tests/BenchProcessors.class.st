@@ -21,10 +21,35 @@ BenchProcessors >> benchClassFinding [
 			print: numberOfClasses;
 			cr;cr.
 
-		self runClassBenchMarksFor: 'znu' resultsInto: aStream.	
-		self runClassBenchMarksFor: 'ast' resultsInto: aStream.	
-		self runClassBenchMarksFor: 'gtspotter' resultsInto: aStream.	
-		self runClassBenchMarksFor: 'test' resultsInto: aStream.	
+		self runClassBenchMarksFor: 'znu' resultsInto: aStream for: #ClassProcessor.	
+		self runClassBenchMarksFor: 'ast' resultsInto: aStream for: #ClassProcessor.	
+		self runClassBenchMarksFor: 'gtspotter' resultsInto: aStream for: #ClassProcessor.	
+		self runClassBenchMarksFor: 'test' resultsInto: aStream for: #ClassProcessor.	
+	]) inspect.
+
+]
+
+{ #category : #benchmarking }
+BenchProcessors >> benchImplementors [
+	<script: 'self new benchImplementors'>
+
+	| numberOfMethods |
+	
+	numberOfMethods := SystemNavigation default allBehaviors sum: [:c | c localMethods size].
+
+	(String streamContents: [ :aStream |
+		aStream 
+			<< 'Methods'; cr;
+			<< '-------'; cr;
+			cr;
+			<< 'Total Methods:';
+			print: numberOfMethods;
+			cr;cr.
+
+		self runClassBenchMarksFor: 'asString' resultsInto: aStream for: #ImplementorsProcessor.	
+		self runClassBenchMarksFor: 'printOn:' resultsInto: aStream for: #ImplementorsProcessor.	
+		self runClassBenchMarksFor: 'asUrl' resultsInto: aStream for: #ImplementorsProcessor.	
+		self runClassBenchMarksFor: 'test' resultsInto: aStream for: #ImplementorsProcessor.	
 	]) inspect.
 
 ]
@@ -37,6 +62,7 @@ BenchProcessors >> contextForText: aString [
 	candidates := GTMockCandidatesList new.
 	stream := GTMockSpotterStream new
 		receiver: candidates;
+		onAddedSelector: #addObject:inProcessor:;
 		yourself.
 
 	^ GTSpotterContext new 
@@ -55,6 +81,12 @@ BenchProcessors >> newClassProcessor [
 	^ GTClassProcessor new
 ]
 
+{ #category : #benching }
+BenchProcessors >> newImplementorsProcessor [
+	
+	^ GTImplementorsProcessor new
+]
+
 { #category : #benchmarking }
 BenchProcessors >> oldClassProcessor [
 
@@ -70,15 +102,26 @@ BenchProcessors >> oldClassProcessor [
 ]
 
 { #category : #benching }
-BenchProcessors >> runClassBenchMarksFor: aString resultsInto: aWriteStream [ 
+BenchProcessors >> oldImplementorsProcessor [
+
+	^ GTSpotterCandidatesListProcessor new
+		title: 'Implementors';
+		filter: GTFilterImplementor item: [ :filter :context | 
+			SystemNavigation default allBehaviorsDo: [ :class | class methodsDo: filter ] ];
+		keyBinding: $m meta;
+		wantsToDisplayOnEmptyQuery: false
+]
+
+{ #category : #benching }
+BenchProcessors >> runClassBenchMarksFor: aString resultsInto: aWriteStream for: processorName [
 	| context oldProcessor newProcessor oldBench newBench |
 	
 	context := self contextForText: aString.
-	oldProcessor := self oldClassProcessor.
+	oldProcessor := self perform: ('old' , processorName) asSymbol.
 	oldBench := [oldProcessor filterInContext: context] bench.
 
 	context := self contextForText: aString.
-	newProcessor := self newClassProcessor.
+	newProcessor := self perform: ('new' , processorName) asSymbol.
 	newBench := [newProcessor filterInContext: context] bench.
 
 	aWriteStream
