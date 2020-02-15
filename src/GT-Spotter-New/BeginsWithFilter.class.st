@@ -5,7 +5,8 @@ Class {
 		'inner',
 		'text',
 		'previousResult',
-		'previousText'
+		'previousText',
+		'convertionToStringBlock'
 	],
 	#category : #'GT-Spotter-New'
 }
@@ -18,10 +19,28 @@ BeginsWithFilter class >> on: aStream [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #iterating }
 BeginsWithFilter >> atEnd [ 
 	
 	^ inner atEnd
+]
+
+{ #category : #convertion }
+BeginsWithFilter >> convertValueToString: aValue [
+
+	^ self convertionToStringBlock value: aValue
+]
+
+{ #category : #accessing }
+BeginsWithFilter >> convertionToStringBlock [
+
+	^ convertionToStringBlock ifNil: [ [ :aValue | aValue ] ]
+]
+
+{ #category : #accessing }
+BeginsWithFilter >> convertionToStringBlock: aBlock [
+
+	convertionToStringBlock := aBlock
 ]
 
 { #category : #accessing }
@@ -52,7 +71,7 @@ BeginsWithFilter >> get: numberOfResults [
 	^ previousResult.
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BeginsWithFilter >> initialize [
 
 	previousResult := OrderedCollection new.
@@ -66,22 +85,22 @@ BeginsWithFilter >> inner: aStream [
 ]
 
 { #category : #accessing }
-BeginsWithFilter >> isValid: aValue [
+BeginsWithFilter >> isValid: aString [
 
-	^ aValue asLowercase beginsWith: text asLowercase
+	^ aString asLowercase beginsWith: text asLowercase
 ]
 
-{ #category : #accessing }
+{ #category : #iterating }
 BeginsWithFilter >> next [
 	| value |
 	[ inner atEnd ]
 		whileFalse: [ value := inner next.
-			(self isValid: value)
+			(self isValid: (self convertValueToString: value))
 				ifTrue: [ ^ value ] ].
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : #iterating }
 BeginsWithFilter >> next: aQuantity [
 
 	^ Array new: aQuantity streamContents: [ :stream | | total last |

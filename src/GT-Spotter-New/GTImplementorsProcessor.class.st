@@ -20,7 +20,10 @@ GTImplementorsProcessor >> keyBinding [
 { #category : #filtering }
 GTImplementorsProcessor >> newFilter [
 
-	^ MethodSelectorHasSubstringFilter on: self newIterator
+	^ (HasSubStringFilter on: self newIterator)
+			convertionToStringBlock: [ :aMethod | aMethod selector ];
+			yourself
+			
 ]
 
 { #category : #acting }
