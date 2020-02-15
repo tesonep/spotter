@@ -61,7 +61,7 @@ BeginsWithFilter >> get: numberOfResults [
 		previousResult := OrderedCollection new ].
 	
 	previousText := text asLowercase.
-	result := previousResult select: [ :e | self isValid: e ].
+	result := previousResult select: [ :e | self isValid: (self convertValueToString:e) ].
 
 	(result size < numberOfResults) ifTrue: [  
 		result := result , (self next: (numberOfResults - result size)) ].
