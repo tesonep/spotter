@@ -23,22 +23,29 @@ SptSpotterProccessor >> filter [
 { #category : #filtering }
 SptSpotterProccessor >> filterInContext: aSpotterContext [ 
 
-	| results |
+	| count |
 
 	(aSpotterContext text isEmpty) ifTrue: [ ^ self ].
 	
+
 	self filter filteringText: aSpotterContext text.
-	results := self filter next: self maxResults.
-	
-	aSpotterContext stream 
-		performSymbol: #addAllCandidates:in:
-		withArguments: { results. self }.
-	
-	(results size = self maxResults ) ifTrue: [ ^ self ].
+
+	count := 0. 
+
+	[ self filter atEnd or: [ count = self maxResults ] ] 
+		whileFalse: [ self filter next ifNotNil: [ :aResult | 
+				aSpotterContext stream 
+					performSymbol: #addCandidate:in:
+					withArguments: { aResult. self }.
+				count := count + 1.
+		]].
+
+	(count = self maxResults ) 
+		ifTrue: [ ^ self ].
 	
 	aSpotterContext stream 
 		performSymbol: #onAmountChanged:in:
-		withArguments: { results size. self }
+		withArguments: { count. self }
 	
 ]
 
