@@ -116,13 +116,15 @@ BenchProcessors >> oldImplementorsProcessor [
 BenchProcessors >> runClassBenchMarksFor: aString resultsInto: aWriteStream for: processorName [
 	| context oldProcessor newProcessor oldBench newBench |
 	
-	context := self contextForText: aString.
-	oldProcessor := self perform: ('old' , processorName) asSymbol.
-	oldBench := [oldProcessor filterInContext: context] bench.
+	oldBench := [
+		context := self contextForText: aString.
+		oldProcessor := self perform: ('old' , processorName) asSymbol.
+		oldProcessor filterInContext: context] bench.
 
-	context := self contextForText: aString.
-	newProcessor := self perform: ('new' , processorName) asSymbol.
-	newBench := [newProcessor filterInContext: context] bench.
+	newBench := [
+		context := self contextForText: aString.
+		newProcessor := self perform: ('new' , processorName) asSymbol.
+		newProcessor filterInContext: context] bench.
 
 	aWriteStream
 			<< 'Searching:';

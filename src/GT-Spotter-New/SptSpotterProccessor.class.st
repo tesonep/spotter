@@ -1,0 +1,83 @@
+Class {
+	#name : #SptSpotterProccessor,
+	#superclass : #Object,
+	#instVars : [
+		'order',
+		'filter'
+	],
+	#category : #'GT-Spotter-New'
+}
+
+{ #category : #filtering }
+SptSpotterProccessor >> actOn: anEntry for: aGTSpotterStep [ 
+
+	^ anEntry evaluateFor: aGTSpotterStep
+]
+
+{ #category : #filtering }
+SptSpotterProccessor >> filter [ 
+	
+	^ filter ifNil: [ filter := self newSource stringFilter: '' ]
+]
+
+{ #category : #filtering }
+SptSpotterProccessor >> filterInContext: aSpotterContext [ 
+
+	| results |
+
+	(aSpotterContext text isEmpty) ifTrue: [ ^ self ].
+	
+	results := (self filter stringFilter: aSpotterContext text) next: self maxResults.
+	
+	aSpotterContext stream 
+		performSymbol: #addAllCandidates:in:
+		withArguments: { results. self }.
+	
+	(results size = self maxResults ) ifTrue: [ ^ self ].
+	
+	aSpotterContext stream 
+		performSymbol: #onAmountChanged:in:
+		withArguments: { results size. self }
+	
+]
+
+{ #category : #filtering }
+SptSpotterProccessor >> keyBinding [ 
+
+	^ nil
+]
+
+{ #category : #configuration }
+SptSpotterProccessor >> maxResults [
+
+	^ 10
+]
+
+{ #category : #filtering }
+SptSpotterProccessor >> newSource [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+SptSpotterProccessor >> order [
+	
+	^ order
+]
+
+{ #category : #accessing }
+SptSpotterProccessor >> order: anObject [
+	order := anObject
+]
+
+{ #category : #filtering }
+SptSpotterProccessor >> render: anEntry [
+		
+	^ anEntry render
+]
+
+{ #category : #filtering }
+SptSpotterProccessor >> title [
+
+	^ self subclassResponsibility
+]

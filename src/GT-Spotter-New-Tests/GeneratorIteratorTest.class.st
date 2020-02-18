@@ -8,7 +8,7 @@ Class {
 GeneratorIteratorTest >> testCollectionWithSingleElementReturnsIt [
 
 	| gen |
-	gen := GeneratorIterator on: #(1).
+	gen := SptCollectionIterator on: #(1).
 	self assert: gen next equals: 1
 ]
 
@@ -16,7 +16,7 @@ GeneratorIteratorTest >> testCollectionWithSingleElementReturnsIt [
 GeneratorIteratorTest >> testCollectionWithSingleManyElementsReturnsTheRequested [
 
 	| gen |
-	gen := GeneratorIterator on: #(1 2 3 4 5 6 7 8 9 10).
+	gen := SptCollectionIterator on: #(1 2 3 4 5 6 7 8 9 10).
 	
 	self assert: gen next equals: 1.
 	self assert: gen next equals: 2.
@@ -27,7 +27,7 @@ GeneratorIteratorTest >> testCollectionWithSingleManyElementsReturnsTheRequested
 GeneratorIteratorTest >> testCollectionWithSingleManyElementsReturnsTheRequestedInCollection [
 
 	| gen |
-	gen := GeneratorIterator on: #(1 2 3 4 5 6 7 8 9 10).
+	gen := SptCollectionIterator on: #(1 2 3 4 5 6 7 8 9 10).
 	
 	self assertCollection: (gen next:3) hasSameElements: #(1 2 3).
 
@@ -37,7 +37,7 @@ GeneratorIteratorTest >> testCollectionWithSingleManyElementsReturnsTheRequested
 GeneratorIteratorTest >> testCollectionWithSingleWithALotOfElementsReturnsTheRequestedInCollection [
 
 	| gen |
-	gen := GeneratorIterator on: (1 to: 10**99).
+	gen := SptCollectionIterator on: (1 to: 10**99).
 	
 	self assertCollection: (gen next:3) hasSameElements: #(1 2 3).
 
@@ -47,7 +47,7 @@ GeneratorIteratorTest >> testCollectionWithSingleWithALotOfElementsReturnsTheReq
 GeneratorIteratorTest >> testEmptyCollectionIsAtEnd [
 
 	| gen |
-	gen := GeneratorIterator on: #().
+	gen := SptCollectionIterator on: #().
 	self assert: gen atEnd
 ]
 
@@ -55,7 +55,7 @@ GeneratorIteratorTest >> testEmptyCollectionIsAtEnd [
 GeneratorIteratorTest >> testResetRestartsIterationOnTheCollection [
 
 	| gen |
-	gen := GeneratorIterator on: #(1 2 3 4 5 6 7 8 9 10).
+	gen := SptCollectionIterator on: #(1 2 3 4 5 6 7 8 9 10).
 	
 	self assertCollection: (gen next:3) hasSameElements: #(1 2 3).
 	gen reset.

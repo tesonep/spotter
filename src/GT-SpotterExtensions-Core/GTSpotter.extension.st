@@ -259,13 +259,13 @@ GTSpotter >> spotterForReferencesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForRepositoriesFor: aStep [
-	<spotterOrder: 87>
+"	<spotterOrder: 87>
 	aStep listProcessor
 		title: 'Monticello Repositories';
 		allCandidates: [ MCRepositoryGroup default repositories ];
 		itemIcon: #systemIcon;
 		wantsToDisplayOnEmptyQuery: false;
-		filter: self defaultFilterClass
+		filter: self defaultFilterClass"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }

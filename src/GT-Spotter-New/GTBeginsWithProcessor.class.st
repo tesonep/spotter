@@ -34,7 +34,7 @@ GTBeginsWithProcessor >> filterInContext: aSpotterContext [
 GTBeginsWithProcessor >> initialize [
 
 	super initialize.
-	filter := self newFilter.
+	filter := self newSource.
 
 ]
 
@@ -45,15 +45,15 @@ GTBeginsWithProcessor >> maxResults [
 ]
 
 { #category : #filtering }
-GTBeginsWithProcessor >> newFilter [
+GTBeginsWithProcessor >> newIterator [
 
-	^ HasSubStringFilter on: self newIterator
+	^ SptCollectionIterator on: self originalCollection
 ]
 
 { #category : #filtering }
-GTBeginsWithProcessor >> newIterator [
+GTBeginsWithProcessor >> newSource [
 
-	^ GeneratorIterator on: self originalCollection
+	^ HasSubStringFilter on: self newIterator
 ]
 
 { #category : #filtering }

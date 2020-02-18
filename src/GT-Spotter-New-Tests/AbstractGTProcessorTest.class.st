@@ -20,13 +20,13 @@ AbstractGTProcessorTest >> assertQuantityOfResults: anInteger [
 { #category : #asserting }
 AbstractGTProcessorTest >> assertResultsIncludes: anElement [ 
 	
-	self assert: (candidates results includes: anElement)
+	self assert: ((candidates results collect: #content) includes: anElement)
 ]
 
 { #category : #asserting }
 AbstractGTProcessorTest >> denyResultsIncludes: anElement [ 
 
-	self deny: (candidates results includes: anElement )
+	self deny: ((candidates results collect: #content) includes: anElement )
 ]
 
 { #category : #tests }
