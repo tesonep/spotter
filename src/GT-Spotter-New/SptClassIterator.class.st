@@ -7,5 +7,5 @@ Class {
 { #category : #accessing }
 SptClassIterator >> elementsDo: aValuable [
 
-	^ SystemNavigation default allBehaviorsDo: aValuable
+	SystemNavigation default allBehaviorsDo: aValuable
 ]

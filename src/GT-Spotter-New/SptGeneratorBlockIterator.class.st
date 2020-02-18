@@ -29,5 +29,5 @@ SptGeneratorBlockIterator >> block: anObject [
 { #category : #accessing }
 SptGeneratorBlockIterator >> elementsDo: aValuable [
 
-	^ block value: aValuable
+	block value: aValuable
 ]

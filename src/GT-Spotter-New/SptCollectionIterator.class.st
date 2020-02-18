@@ -29,5 +29,5 @@ SptCollectionIterator >> collection: anObject [
 { #category : #accessing }
 SptCollectionIterator >> elementsDo: aValuable [
 
-	^ collection do: aValuable 
+	collection do: aValuable 
 ]

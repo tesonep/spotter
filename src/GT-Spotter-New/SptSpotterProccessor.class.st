@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'order',
-		'filter'
+		'filter',
+		'results'
 	],
 	#category : #'GT-Spotter-New'
 }
@@ -12,6 +13,12 @@ Class {
 SptSpotterProccessor >> actOn: anEntry for: aGTSpotterStep [ 
 
 	^ anEntry evaluateFor: aGTSpotterStep
+]
+
+{ #category : #accessing }
+SptSpotterProccessor >> allFilteredCandidates [
+	
+	^ results
 ]
 
 { #category : #filtering }
@@ -23,29 +30,25 @@ SptSpotterProccessor >> filter [
 { #category : #filtering }
 SptSpotterProccessor >> filterInContext: aSpotterContext [ 
 
-	| count |
-
 	(aSpotterContext text isEmpty) ifTrue: [ ^ self ].
 	
-
 	self filter filteringText: aSpotterContext text.
+	results := OrderedCollection new.
 
-	count := 0. 
-
-	[ self filter atEnd or: [ count = self maxResults ] ] 
+	[ self filter atEnd or: [ results size = self maxResults ] ] 
 		whileFalse: [ self filter next ifNotNil: [ :aResult | 
 				aSpotterContext stream 
 					performSymbol: #addCandidate:in:
 					withArguments: { aResult. self }.
-				count := count + 1.
+				results add:aResult.
 		]].
 
-	(count = self maxResults ) 
+	(results size = self maxResults ) 
 		ifTrue: [ ^ self ].
 	
 	aSpotterContext stream 
 		performSymbol: #onAmountChanged:in:
-		withArguments: { count. self }
+		withArguments: { results size. self }
 	
 ]
 

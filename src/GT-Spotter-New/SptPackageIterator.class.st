@@ -7,5 +7,5 @@ Class {
 { #category : #accessing }
 SptPackageIterator >> elementsDo: aValuable [
 
-	^ RPackageOrganizer default packagesDo: aValuable
+	RPackageOrganizer default packagesDo: aValuable
 ]
