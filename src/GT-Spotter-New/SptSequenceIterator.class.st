@@ -22,6 +22,12 @@ SptSequenceIterator >> atEnd [
 ]
 
 { #category : #accessing }
+SptSequenceIterator >> filteringText: aString [
+
+	iterators do: [ :e | e filteringText: aString ]
+]
+
+{ #category : #accessing }
 SptSequenceIterator >> iterators: aCollection [ 
 
 	iterators := aCollection 
@@ -30,10 +36,8 @@ SptSequenceIterator >> iterators: aCollection [
 { #category : #accessing }
 SptSequenceIterator >> next [
 
-	^ iterators
-		detect: [ :e | e atEnd not ]
-		ifFound: [ :e | e next ]
-		ifNone: [ nil ]
+	iterators do: [ :e | e next ifNotNil: [ :aValue | ^ aValue ] ].
+	^ nil
 ]
 
 { #category : #accessing }

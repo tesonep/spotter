@@ -5,6 +5,35 @@ Class {
 }
 
 { #category : #tests }
+SptCombinatorsTest >> testBeginsWithFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
+
+	| it |
+	it := (SptGeneratorBlockIterator on: [ :x | x value: 'bbb'; value:'bbb1'; error ]) beginsWithFilter: 'b'.
+	it next.
+	it beginsWithFilter: 'bb'.
+	
+	self assert: it next equals: 'bbb'
+]
+
+{ #category : #tests }
+SptCombinatorsTest >> testBeginsWithFilterReturnsValidResults [
+
+	| it |
+	it := (SptCollectionIterator on: { 'aaa'. 'bbb'. 'ccc' }) beginsWithFilter: 'b'.
+	self assert: it next equals: 'bbb'
+]
+
+{ #category : #tests }
+SptCombinatorsTest >> testBeginsWithFilterReturnsValidResultsWithTheSameFilter [
+
+	| it |
+	it := (SptCollectionIterator on: { 'aaa'. 'bbb'. 'ccc' }) beginsWithFilter: 'b'.
+	it beginsWithFilter: 'b'.
+	
+	self assert: it next equals: 'bbb'
+]
+
+{ #category : #tests }
 SptCombinatorsTest >> testIteratorOnACollectedCollectionIsFiltered [
 
 	| it |
@@ -133,30 +162,30 @@ SptCombinatorsTest >> testSequenceReturnsTheSequenceOfAllResultsInParts [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testStringFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
+SptCombinatorsTest >> testSubstringFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
 
 	| it |
-	it := (SptGeneratorBlockIterator on: [ :x | x value: 'bbb'; value:'bbb1'; error ]) stringFilter: 'b'.
+	it := (SptGeneratorBlockIterator on: [ :x | x value: '1bbb'; value:'11bbb1'; error ]) substringFilter: 'b'.
 	it next.
-	it stringFilter: 'bb'.
+	it substringFilter: 'bb'.
 	
-	self assert: it next equals: 'bbb'
+	self assert: it next equals: '1bbb'
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testStringFilterReturnsValidResults [
+SptCombinatorsTest >> testSubstringFilterReturnsValidResults [
 
 	| it |
-	it := (SptCollectionIterator on: { 'aaa'. 'bbb'. 'ccc' }) stringFilter: 'b'.
-	self assert: it next equals: 'bbb'
+	it := (SptCollectionIterator on: { 'xxxaaa'. 'xxxbbb'. 'xxxccc' }) substringFilter: 'b'.
+	self assert: it next equals: 'xxxbbb'
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testStringFilterReturnsValidResultsWithTheSameFilter [
+SptCombinatorsTest >> testSubstringFilterReturnsValidResultsWithTheSameFilter [
 
 	| it |
-	it := (SptCollectionIterator on: { 'aaa'. 'bbb'. 'ccc' }) stringFilter: 'b'.
-	it stringFilter: 'b'.
+	it := (SptCollectionIterator on: { 'aaa'. 'xxxbbb'. 'ccc' }) substringFilter: 'b'.
+	it substringFilter: 'b'.
 	
-	self assert: it next equals: 'bbb'
+	self assert: it next equals: 'xxxbbb'
 ]

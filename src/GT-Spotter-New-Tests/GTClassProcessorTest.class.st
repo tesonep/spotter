@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 GTClassProcessorTest >> processor [
 
-	^ GTClassProcessor new
+	^ SptClassProcessor new
 ]
 
 { #category : #tests }
@@ -39,7 +39,7 @@ GTClassProcessorTest >> testGTClassProcessorIsRemovedAfterUpdatingText [
 	self runForText: 'gtclass'.
 	self rerunWithText: 'gtclassprocesst'.
 	
-	self denyResultsIncludes: GTClassProcessor
+	self denyResultsIncludes: SptClassProcessor
 ]
 
 { #category : #tests }

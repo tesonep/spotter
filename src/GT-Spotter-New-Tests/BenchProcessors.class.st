@@ -78,13 +78,13 @@ BenchProcessors >> contextForText: aString [
 { #category : #benchmarking }
 BenchProcessors >> newClassProcessor [
 
-	^ GTClassProcessor new
+	^ SptClassProcessor new
 ]
 
 { #category : #benching }
 BenchProcessors >> newImplementorsProcessor [
 	
-	^ GTImplementorsProcessor new
+	^ SptImplementorsProcessor new
 ]
 
 { #category : #benchmarking }

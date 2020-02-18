@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 GTPackageProcessorTest >> processor [
 
-	^ GTPackageProcessor new
+	^ SptPackageProcessor new
 ]
 
 { #category : #tests }
@@ -41,7 +41,7 @@ GTPackageProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 	self runForText: 'gt-spotter'.
 	self rerunWithText: 'gt-spotter-new-te'.
 	
-	self denyResultsIncludes: GTClassProcessor package
+	self denyResultsIncludes: SptClassProcessor package
 ]
 
 { #category : #tests }

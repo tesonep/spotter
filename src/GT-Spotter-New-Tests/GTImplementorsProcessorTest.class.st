@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 GTImplementorsProcessorTest >> processor [
 
-	^ GTImplementorsProcessor new
+	^ SptImplementorsProcessor new
 ]
 
 { #category : #tests }

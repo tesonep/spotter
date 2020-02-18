@@ -17,7 +17,7 @@ SptSpotterProccessor >> actOn: anEntry for: aGTSpotterStep [
 { #category : #filtering }
 SptSpotterProccessor >> filter [ 
 	
-	^ filter ifNil: [ filter := self newSource stringFilter: '' ]
+	^ filter ifNil: [ filter := self newSource ]
 ]
 
 { #category : #filtering }
@@ -27,7 +27,8 @@ SptSpotterProccessor >> filterInContext: aSpotterContext [
 
 	(aSpotterContext text isEmpty) ifTrue: [ ^ self ].
 	
-	results := (self filter stringFilter: aSpotterContext text) next: self maxResults.
+	self filter filteringText: aSpotterContext text.
+	results := self filter next: self maxResults.
 	
 	aSpotterContext stream 
 		performSymbol: #addAllCandidates:in:

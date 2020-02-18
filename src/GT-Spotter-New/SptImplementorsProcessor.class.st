@@ -1,23 +1,23 @@
 Class {
-	#name : #GTImplementorsProcessor,
+	#name : #SptImplementorsProcessor,
 	#superclass : #SptSpotterProccessor,
 	#category : #'GT-Spotter-New'
 }
 
 { #category : #accessing }
-GTImplementorsProcessor >> keyBinding [
+SptImplementorsProcessor >> keyBinding [
 	
 	^ $m meta
 ]
 
 { #category : #filtering }
-GTImplementorsProcessor >> newSource [
+SptImplementorsProcessor >> newSource [
 
 	^ SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]
 ]
 
 { #category : #accessing }
-GTImplementorsProcessor >> title [
+SptImplementorsProcessor >> title [
 
 	^ 'Implementors'
 ]

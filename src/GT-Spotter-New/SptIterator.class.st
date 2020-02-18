@@ -10,16 +10,42 @@ SptIterator >> , aSptGeneratorIterator [
 	^ SptSequenceIterator with: { self. aSptGeneratorIterator }
 ]
 
+{ #category : #filtering }
+SptIterator >> asBeginsWithFilter [
+	
+	^ self beginsWithFilter: ''
+]
+
+{ #category : #filtering }
+SptIterator >> asSubstringFilter [
+	
+	^ self substringFilter: ''
+]
+
 { #category : #accessing }
 SptIterator >> atEnd [ 
 
 	^ self subclassResponsibility 
 ]
 
+{ #category : #filtering }
+SptIterator >> beginsWithFilter: aString [ 
+	
+	^ SptBeginsWithFilter on: self with: aString
+]
+
 { #category : #transforming }
 SptIterator >> collect: aBlockClosure [ 
 	
 	^ SptTransformation on: self with: aBlockClosure
+]
+
+{ #category : #filtering }
+SptIterator >> filteringText: aString [
+
+	"The subclasses should decide what to do if they handle text filtering"
+
+	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }
@@ -46,7 +72,7 @@ SptIterator >> select: aBlockClosure [
 ]
 
 { #category : #filtering }
-SptIterator >> stringFilter: aString [ 
+SptIterator >> substringFilter: aString [ 
 	
 	^ SptSubStringFilter on: self with: aString
 ]

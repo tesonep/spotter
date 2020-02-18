@@ -128,9 +128,9 @@ GTSpotter >> spotterForCachedPlaygroundPagesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForClassesFor: aStep [
-	<spotterOrder: 1>
+"	<spotterOrder: 1>
 
-	aStep addProcessor: GTClassProcessor new			
+	aStep addProcessor: SptClassProcessor new			"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -185,14 +185,14 @@ GTSpotter >> spotterForGlobalVarsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForHelpTopicFor: aStep [
-	<spotterOrder: 200>
+"	<spotterOrder: 200>
 	aStep listProcessor 
 			allCandidates: [ SystemHelp asHelpTopic gtAllSubtopics ];
 			title: 'Help topics';
 			itemName: [ :helpTopic | helpTopic title ];
 			itemIcon: [ :helpTopic | helpTopic gtTopicIcon ];
 			filter: self defaultFilterClass;
-			wantsToDisplayOnEmptyQuery: true
+			wantsToDisplayOnEmptyQuery: true"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -228,9 +228,9 @@ GTSpotter >> spotterForMetacelloConfigurationsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForPackagesFor: aStep [
-	<spotterOrder: 20>
+"	<spotterOrder: 20>
 
-	aStep addProcessor: GTPackageProcessor new
+	aStep addProcessor: SptPackageProcessor new"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -300,23 +300,23 @@ GTSpotter >> spotterForStashedPlaygroundPagesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterHistoryFor: aStep [
-	<spotterOrder: 8>
+"	<spotterOrder: 8>
 	aStep listProcessor
 			allCandidates: [ self history asArray select: [ :each | each isNotNil and: [ each value isNotNil ] ] ];
 			title: 'History';
 			itemName: [ :item | 
 				item class = GTSpotterProcessorLink 
-					ifTrue: [ item processor itemNameFor: item value ] " HACK: this triggers a recursion ! ... but processor is undefined for aCandidate "
+					ifTrue: [ item processor itemNameFor: item value ] 
 					ifFalse: [ item gtDisplayString ] ];
-			filter: self defaultFilterClass
+			filter: self defaultFilterClass"
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterImplementorsFor: aStep [
-	<spotterOrder: 30>
+"	<spotterOrder: 30>
 
-	aStep addProcessor: GTImplementorsProcessor new
-"	self flag: #specialFilter.
+	aStep addProcessor: SptImplementorsProcessor new
+	self flag: #specialFilter.
 	aStep listProcessor
 		title: 'Implementors';
 		filter: GTFilterImplementor item: [ :filter :context | 
@@ -353,10 +353,10 @@ GTSpotter >> spotterWindowsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterWorldMenuFor: aStep [
-	<spotterOrder: 9>
+"	<spotterOrder: 9>
 	
 	^ (self currentWorld worldMenu spotterItemsFor: aStep)
 		candidatesLimit: 15;
 		allCandidates: [ self currentWorld worldMenu allItems ];
-		title: 'Menu'
+		title: 'Menu'"
 ]
