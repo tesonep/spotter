@@ -337,6 +337,13 @@ GTSpotter >> spotterStfxFor: aStep [
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
+GTSpotter >> spotterUnifiedProcessorFor: aStep [
+	<spotterOrder: 1>
+	
+	aStep addProcessor: SptUnifiedProcessor new
+]
+
+{ #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterWindowsFor: aStep [
 "	<spotterOrder: 5>
 
