@@ -58,3 +58,21 @@ SptEntry >> render [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #'as yet unclassified' }
+SptEntry >> spotterPreviewIn: aComposite inContext: aSpotter [
+
+	^ content spotterPreviewCodeIn: aComposite
+]
+
+{ #category : #'as yet unclassified' }
+SptEntry >> spotterProcessorsFor: aSpotterStep [
+
+	^ content spotterProcessorsFor: aSpotterStep
+]
+
+{ #category : #'as yet unclassified' }
+SptEntry >> spotterProcessorsFor: aSpotterStep pragma: aPragma [
+
+	^ content spotterProcessorsFor: aSpotterStep pragma: aPragma
+]
