@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'iterators'
 	],
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #'instance creation' }
@@ -19,6 +19,12 @@ SptSequenceIterator class >> with: aCollection [
 SptSequenceIterator >> atEnd [ 
 
 	^ iterators allSatisfy: [ :e | e atEnd ]
+]
+
+{ #category : #initialization }
+SptSequenceIterator >> categoriesSelected: categories [ 
+
+	iterators do: [ :e | e categoriesSelected: categories ]
 ]
 
 { #category : #accessing }

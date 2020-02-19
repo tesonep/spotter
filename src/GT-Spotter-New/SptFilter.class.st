@@ -1,7 +1,7 @@
 Class {
 	#name : #SptFilter,
 	#superclass : #SptIteratorBlockDecorator,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #initialization }

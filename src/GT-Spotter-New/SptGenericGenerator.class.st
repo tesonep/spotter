@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'generator'
 	],
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #accessing }

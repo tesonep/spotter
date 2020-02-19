@@ -300,7 +300,7 @@ GTSpotter >> spotterForStashedPlaygroundPagesFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterHistoryFor: aStep [
-"	<spotterOrder: 8>
+	<spotterOrder: 8>
 	aStep listProcessor
 			allCandidates: [ self history asArray select: [ :each | each isNotNil and: [ each value isNotNil ] ] ];
 			title: 'History';
@@ -308,7 +308,7 @@ GTSpotter >> spotterHistoryFor: aStep [
 				item class = GTSpotterProcessorLink 
 					ifTrue: [ item processor itemNameFor: item value ] 
 					ifFalse: [ item gtDisplayString ] ];
-			filter: self defaultFilterClass"
+			filter: self defaultFilterClass
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }
@@ -360,10 +360,10 @@ GTSpotter >> spotterWindowsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterWorldMenuFor: aStep [
-"	<spotterOrder: 9>
+	<spotterOrder: 9>
 	
 	^ (self currentWorld worldMenu spotterItemsFor: aStep)
 		candidatesLimit: 15;
 		allCandidates: [ self currentWorld worldMenu allItems ];
-		title: 'Menu'"
+		title: 'Menu'
 ]

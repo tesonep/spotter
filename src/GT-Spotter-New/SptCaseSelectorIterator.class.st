@@ -5,8 +5,14 @@ Class {
 		'lowercaseIterator',
 		'uppercaseIterator'
 	],
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
+
+{ #category : #filtering }
+SptCaseSelectorIterator >> categoriesSelected: categories [ 
+
+	inner categoriesSelected: categories
+]
 
 { #category : #filtering }
 SptCaseSelectorIterator >> filteringText: aString [
@@ -15,8 +21,8 @@ SptCaseSelectorIterator >> filteringText: aString [
 			^ self ].
 
 	inner := aString first isLowercase
-		ifTrue: [ lowercaseIterator ]
-		ifFalse: [ uppercaseIterator ].
+		ifTrue: [ lowercaseIterator , uppercaseIterator ]
+		ifFalse: [ uppercaseIterator , lowercaseIterator ].
 		
 	inner filteringText: aString
 ]

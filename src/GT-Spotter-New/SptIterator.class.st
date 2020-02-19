@@ -1,7 +1,7 @@
 Class {
 	#name : #SptIterator,
 	#superclass : #Object,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #sequencing }
@@ -34,18 +34,19 @@ SptIterator >> beginsWithFilter: aString [
 	^ SptBeginsWithFilter on: self with: aString
 ]
 
+{ #category : #accessing }
+SptIterator >> categoriesSelected: categories [
+]
+
 { #category : #transforming }
 SptIterator >> collect: aBlockClosure [ 
 	
 	^ SptTransformation on: self with: aBlockClosure
 ]
 
-{ #category : #filtering }
+{ #category : #accessing }
 SptIterator >> filteringText: aString [
 
-	"The subclasses should decide what to do if they handle text filtering"
-
-	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }
@@ -75,4 +76,12 @@ SptIterator >> select: aBlockClosure [
 SptIterator >> substringFilter: aString [ 
 	
 	^ SptSubStringFilter on: self with: aString
+]
+
+{ #category : #accessing }
+SptIterator >> upToEnd [
+
+	^ OrderedCollection
+		streamContents:
+			[ :stream | [ self atEnd ] whileFalse: [ stream nextPut: self next ] ]
 ]

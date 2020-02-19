@@ -1,7 +1,7 @@
 Class {
 	#name : #SptTransformation,
 	#superclass : #SptIteratorBlockDecorator,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #initialization }

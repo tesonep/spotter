@@ -4,13 +4,19 @@ Class {
 	#instVars : [
 		'inner'
 	],
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #initialization }
 SptIteratorDecorator >> atEnd [ 
 
 	^ inner atEnd
+]
+
+{ #category : #filtering }
+SptIteratorDecorator >> filteringText: aString [ 
+	
+	inner filteringText: aString
 ]
 
 { #category : #accessing }

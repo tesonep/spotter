@@ -15,6 +15,14 @@ GTMockCandidatesList >> addAllCandidates: aCollection in: aProcessor [
 	results addAll: aCollection
 ]
 
+{ #category : #'as yet unclassified' }
+GTMockCandidatesList >> addCandidate: anEntry in: aProcessor [
+
+	results add: anEntry 
+	
+	
+]
+
 { #category : #adding }
 GTMockCandidatesList >> addObject: anObject inProcessor: aProcessor [
 

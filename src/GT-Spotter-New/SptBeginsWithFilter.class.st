@@ -1,7 +1,7 @@
 Class {
 	#name : #SptBeginsWithFilter,
 	#superclass : #SptAbstractStringFilter,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #accessing }

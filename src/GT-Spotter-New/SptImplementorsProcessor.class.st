@@ -1,14 +1,8 @@
 Class {
 	#name : #SptImplementorsProcessor,
 	#superclass : #SptSpotterProccessor,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Processors'
 }
-
-{ #category : #accessing }
-SptImplementorsProcessor >> keyBinding [
-	
-	^ $m meta
-]
 
 { #category : #filtering }
 SptImplementorsProcessor >> newSource [

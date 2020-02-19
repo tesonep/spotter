@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'content'
 	],
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Entries'
 }
 
 { #category : #wrapping }
@@ -42,6 +42,12 @@ SptEntry >> evaluateFor: aGTSpotterStep [
 
 	self doEvaluate.
 	aGTSpotterStep exit.
+]
+
+{ #category : #'as yet unclassified' }
+SptEntry >> gtDisplayString [
+
+	^ content gtDisplayString
 ]
 
 { #category : #accessing }

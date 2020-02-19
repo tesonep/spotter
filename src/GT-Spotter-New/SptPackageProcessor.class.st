@@ -1,14 +1,8 @@
 Class {
 	#name : #SptPackageProcessor,
 	#superclass : #SptSpotterProccessor,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Processors'
 }
-
-{ #category : #accessing }
-SptPackageProcessor >> keyBinding [
-	
-	^ nil
-]
 
 { #category : #filtering }
 SptPackageProcessor >> newSource [

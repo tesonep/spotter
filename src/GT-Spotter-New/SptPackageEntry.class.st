@@ -1,7 +1,7 @@
 Class {
 	#name : #SptPackageEntry,
 	#superclass : #SptEntry,
-	#category : #'GT-Spotter-New'
+	#category : #'GT-Spotter-New-Entries'
 }
 
 { #category : #accessing }
