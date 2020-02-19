@@ -104,10 +104,7 @@ GTSpotterProcessor >> installKeymappingsOn: aGTSpotterMorph [
 			aGTSpotterMorph 
 				bindKeyCombination: keyCombination 
 				ofProcessor: self 
-				toAction: (MessageSend 
-									receiver: aGTSpotterMorph 
-									selector: #onKeyProcessor: 
-									arguments: {self}) ]
+				toAction: [ aGTSpotterMorph onKeyProcessor: self ] ]
 ]
 
 { #category : #testing }

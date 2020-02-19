@@ -54,6 +54,7 @@ SptQuery >> initialize [
 
 	super initialize.
 	modifiers := OrderedCollection new.
+	query:= ''.
 ]
 
 { #category : #testing }
@@ -89,7 +90,9 @@ SptQuery >> textInSearchBar [
 { #category : #updating }
 SptQuery >> updateFromContext: aGTSpotterContext [
 	| textParts |
-	textParts := aGTSpotterContext text trimBoth
+
+	modifiers removeAll.
+	textParts := (aGTSpotterContext search ifNil:['']) trimBoth
 		substrings:
 			{Character space.
 			Character tab}.
@@ -98,7 +101,7 @@ SptQuery >> updateFromContext: aGTSpotterContext [
 	textParts
 		do: [ :aPart | 
 			(aPart beginsWith: '#')
-				ifTrue: [ modifiers add: aPart asSymbol. ]
+				ifTrue: [ modifiers add: aPart allButFirst asSymbol. ]
 				ifFalse: [ query := (query , ' ' , aPart) trimBoth ] ].
 			
 	spotterContext := aGTSpotterContext

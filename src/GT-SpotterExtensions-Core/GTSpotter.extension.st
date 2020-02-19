@@ -185,14 +185,15 @@ GTSpotter >> spotterForGlobalVarsFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterForHelpTopicFor: aStep [
-"	<spotterOrder: 200>
+	<spotterOrder: 200>
 	aStep listProcessor 
 			allCandidates: [ SystemHelp asHelpTopic gtAllSubtopics ];
 			title: 'Help topics';
 			itemName: [ :helpTopic | helpTopic title ];
 			itemIcon: [ :helpTopic | helpTopic gtTopicIcon ];
+			keyBinding: $h meta;
 			filter: self defaultFilterClass;
-			wantsToDisplayOnEmptyQuery: true"
+			wantsToDisplayOnEmptyQuery: true
 ]
 
 { #category : #'*GT-SpotterExtensions-Core' }

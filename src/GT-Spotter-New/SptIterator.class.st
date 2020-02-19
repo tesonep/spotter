@@ -60,9 +60,10 @@ SptIterator >> next: aQuantity [
 
 	^ OrderedCollection streamContents: [ :stream | | total last |
 			total := 0.
-			[ (last := self next) ifNotNil: [ :each | 
-				stream nextPut: each.
-				total := total + 1 ] ]
+			[ (last := self next).
+				last ifNotNil: [  
+					stream nextPut: last.
+					total := total + 1 ] ]
 				doWhileTrue: [ total < aQuantity and: [ last notNil ] ] ]
 ]
 

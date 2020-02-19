@@ -7,7 +7,8 @@ Class {
 { #category : #accessing }
 SptClassProcessor >> newSource [
 
-	^ SptClassIterator new collect: [ :e | SptClassEntry on: e ]
+	^ (SptClassIterator new select: [:e | e isMeta not])
+		collect: [ :e | SptClassEntry on: e ]
 ]
 
 { #category : #accessing }
