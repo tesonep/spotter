@@ -359,6 +359,15 @@ GTSpotterMorph >> spotterModel: aSpotter [
 	spotterModel announcer when: GTSpotterExitAnnouncement send: #closeSpotter to: self.
 	spotterModel announcer when: GTSpotterShowPreview send: #onShowPreview to: self.
 	spotterModel announcer when: GTSpotterHidePreview send: #onHidePreview to: self.
+	spotterModel announcer 
+		when: GTSpotterQueryStarted 
+		send: #showSpinner 
+		to: self paneBrick contentsBrick headerBrick.
+
+	spotterModel announcer 
+		when: GTSpotterQueryEnded 
+		send: #hideSpinner 
+		to: self paneBrick contentsBrick headerBrick.
 	
 	self breadcrumbBrick spotterModel: spotterModel.
 	self paneBrick spotterModel: spotterModel.

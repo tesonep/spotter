@@ -117,6 +117,8 @@ GTSpotterStep >> candidates [
 		candidates announcer when: GTSpotterCandidateAdded send: #onCandidateAdded to: self.
 		candidates announcer when: GTSpotterAllCandidatesAdded send: #onCandidateAdded to: self.
 		candidates announcer when: GTSpotterAllCandidatesRemoved do: [ self deselect ].
+		candidates announcer when: GTSpotterQueryStarted send: #propagateEvent: to: self.
+		candidates announcer when: GTSpotterQueryEnded send: #propagateEvent: to: self.
 		candidates ]
 ]
 
@@ -395,6 +397,14 @@ GTSpotterStep >> processors: aCollection [
 GTSpotterStep >> processorsFilter [
 
 	^ self spotter processorsFilter
+]
+
+{ #category : #'event processing' }
+GTSpotterStep >> propagateEvent: ann [ 
+
+	self announcer announce: ann
+
+	
 ]
 
 { #category : #private }

@@ -368,8 +368,17 @@ GTSpotter >> menu [
 { #category : #'instance creation' }
 GTSpotter >> newStep [
 
-	^ self defaultStep
-		spotter: self
+	| step |
+	
+	step := self defaultStep
+						spotter: self;
+						yourself.
+	
+	step announcer 
+			when: GTSpotterQueryStarted send: #propagateEvent: to: self;
+			when: GTSpotterQueryEnded send: #propagateEvent: to: self.
+
+	^ step
 ]
 
 { #category : #notifying }
@@ -495,6 +504,12 @@ GTSpotter >> processorsFilter: aFilter [
    "Set the filter for determining whether or not processors get added to a step."
 
 	processorsFilter := aFilter
+]
+
+{ #category : #'event handling' }
+GTSpotter >> propagateEvent: ann [
+
+	self announcer announce: ann	
 ]
 
 { #category : #'actions api' }

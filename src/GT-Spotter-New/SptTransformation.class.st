@@ -7,7 +7,7 @@ Class {
 { #category : #initialization }
 SptTransformation >> next [
 
-	^ self transform: inner next
+	^ inner next ifNil: [ nil ] ifNotNil:[ :aValue | self transform: aValue]
 ]
 
 { #category : #tranforming }

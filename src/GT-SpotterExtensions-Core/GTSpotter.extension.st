@@ -339,7 +339,7 @@ GTSpotter >> spotterStfxFor: aStep [
 
 { #category : #'*GT-SpotterExtensions-Core' }
 GTSpotter >> spotterUnifiedProcessorFor: aStep [
-	<spotterOrder: 1>
+	<spotterOrder: 10>
 	
 	aStep addProcessor: SptUnifiedProcessor new
 ]

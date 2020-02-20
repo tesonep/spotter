@@ -65,6 +65,11 @@ SptEntry >> render [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+SptEntry >> spotterActDefault [
+	^ content spotterActDefault 
+]
+
 { #category : #'as yet unclassified' }
 SptEntry >> spotterPreviewIn: aComposite inContext: aSpotter [
 

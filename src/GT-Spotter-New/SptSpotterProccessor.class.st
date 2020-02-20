@@ -6,7 +6,8 @@ Class {
 		'filter',
 		'results',
 		'query',
-		'spotterMorph'
+		'spotterMorph',
+		'running'
 	],
 	#category : #'GT-Spotter-New-Processors'
 }
@@ -61,8 +62,10 @@ SptSpotterProccessor >> filter [
 { #category : #filtering }
 SptSpotterProccessor >> filterInContext: aSpotterContext [ 
 
+	self notifyStarted: aSpotterContext.
 	self query updateFromContext: aSpotterContext.
-	self executeQuery
+	self executeQuery.
+	self notifyEnded: aSpotterContext.
 
 ]
 
@@ -77,6 +80,12 @@ SptSpotterProccessor >> isRelevantForQuery: aString [
 	
 	"I will handle... I am old enough"
 	^ true
+]
+
+{ #category : #testing }
+SptSpotterProccessor >> isRunning [ 
+
+	^ running
 ]
 
 { #category : #'key-bindings' }
@@ -94,6 +103,26 @@ SptSpotterProccessor >> maxResults [
 SptSpotterProccessor >> newSource [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #events }
+SptSpotterProccessor >> notifyEnded: aSpotterContext [
+
+	running := false.
+	aSpotterContext stream 
+		performSymbol: #processorEnded: 
+		withArguments: { self }.
+
+]
+
+{ #category : #events }
+SptSpotterProccessor >> notifyStarted: aSpotterContext [
+
+	running := true.
+	aSpotterContext stream 
+		performSymbol: #processorStarted: 
+		withArguments: { self }.
+
 ]
 
 { #category : #accessing }

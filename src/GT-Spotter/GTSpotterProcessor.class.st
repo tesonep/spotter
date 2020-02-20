@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'allFilteredCandidates',
-		'order'
+		'order',
+		'running'
 	],
 	#category : #'GT-Spotter-Processors'
 }
@@ -35,13 +36,24 @@ GTSpotterProcessor >> basicContinueFilterInContext: aSpotterContext [
 
 { #category : #private }
 GTSpotterProcessor >> basicFilterInContext: aSpotterContext [
+
+	running := true.
+	aSpotterContext stream 
+		performSymbol: #processorStarted: 
+		withArguments: { self }.
 	
 	self prepareProcessorInContext: aSpotterContext.
 	(self shouldFilterInContext: aSpotterContext) ifTrue: [
 		allFilteredCandidates := self doFilterInContext: aSpotterContext ].
 	aSpotterContext stream 
 		performSymbol: #onAmountChanged:in: 
-		withArguments: { self allFilteredCandidates size . self }
+		withArguments: { self allFilteredCandidates size . self }.
+		
+	running := false.
+	aSpotterContext stream 
+		performSymbol: #processorEnded: 
+		withArguments: { self }.
+
 ]
 
 { #category : #private }
@@ -95,6 +107,13 @@ GTSpotterProcessor >> hasFilteredCandidates [
 	^ self allFilteredCandidates notEmpty
 ]
 
+{ #category : #initialization }
+GTSpotterProcessor >> initialize [ 
+
+	super initialize.
+	running := false
+]
+
 { #category : #'key-bindings' }
 GTSpotterProcessor >> installKeymappingsOn: aGTSpotterMorph [
 
@@ -114,6 +133,12 @@ GTSpotterProcessor >> isRelevantForQuery: categoryQueryPrefix [
 										copyReplaceAll: String space
 										with: ''.
 	^ trimmedProcessorTitle beginsWith: categoryQueryPrefix
+]
+
+{ #category : #testing }
+GTSpotterProcessor >> isRunning [ 
+	
+	^ running
 ]
 
 { #category : #'key-bindings' }
