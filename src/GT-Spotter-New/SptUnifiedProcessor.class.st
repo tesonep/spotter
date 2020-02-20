@@ -37,7 +37,7 @@ SptUnifiedProcessor >> newSource [
 			SptCategoryFilterIterator category: #Packages for: (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asBeginsWithFilter.
 			SptCategoryFilterIterator category: #Classes for: ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asSubstringFilter.		
 			SptCategoryFilterIterator category: #Packages for: (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asSubstringFilter});
-		yourself.
+		asWithoutDuplicates.
 
 
 ]

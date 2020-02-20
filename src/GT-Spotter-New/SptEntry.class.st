@@ -15,6 +15,13 @@ SptEntry class >> on: aValue [
 		yourself
 ]
 
+{ #category : #comparing }
+SptEntry >> = anEntry [
+
+	^ self species = anEntry species
+		and: [ anEntry content = self content ]
+]
+
 { #category : #accessing }
 SptEntry >> asString [ 
 
@@ -48,6 +55,12 @@ SptEntry >> evaluateFor: aGTSpotterStep [
 SptEntry >> gtDisplayString [
 
 	^ content gtDisplayString
+]
+
+{ #category : #comparing }
+SptEntry >> hash [
+
+	^ content hash
 ]
 
 { #category : #accessing }

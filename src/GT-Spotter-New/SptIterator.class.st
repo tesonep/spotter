@@ -22,6 +22,12 @@ SptIterator >> asSubstringFilter [
 	^ self substringFilter: ''
 ]
 
+{ #category : #filtering }
+SptIterator >> asWithoutDuplicates [
+	
+	^ SptWithoutDuplicatesDecorator on: self
+]
+
 { #category : #accessing }
 SptIterator >> atEnd [ 
 

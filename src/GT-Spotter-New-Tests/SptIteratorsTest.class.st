@@ -1,11 +1,11 @@
 Class {
-	#name : #SptCombinatorsTest,
+	#name : #SptIteratorsTest,
 	#superclass : #TestCase,
 	#category : #'GT-Spotter-New-Tests'
 }
 
 { #category : #tests }
-SptCombinatorsTest >> testBeginsWithFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
+SptIteratorsTest >> testBeginsWithFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
 
 	| it |
 	it := (SptGeneratorBlockIterator on: [ :x | x value: 'bbb'; value:'bbb1'; error ]) beginsWithFilter: 'b'.
@@ -16,7 +16,7 @@ SptCombinatorsTest >> testBeginsWithFilterDoesNotFetchTwiceIfTheFilterIsARefinem
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testBeginsWithFilterReturnsValidResults [
+SptIteratorsTest >> testBeginsWithFilterReturnsValidResults [
 
 	| it |
 	it := (SptCollectionIterator on: { 'aaa'. 'bbb'. 'ccc' }) beginsWithFilter: 'b'.
@@ -24,7 +24,7 @@ SptCombinatorsTest >> testBeginsWithFilterReturnsValidResults [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testBeginsWithFilterReturnsValidResultsWithTheSameFilter [
+SptIteratorsTest >> testBeginsWithFilterReturnsValidResultsWithTheSameFilter [
 
 	| it |
 	it := (SptCollectionIterator on: { 'aaa'. 'bbb'. 'ccc' }) beginsWithFilter: 'b'.
@@ -34,7 +34,7 @@ SptCombinatorsTest >> testBeginsWithFilterReturnsValidResultsWithTheSameFilter [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectedCollectionIsFiltered [
+SptIteratorsTest >> testIteratorOnACollectedCollectionIsFiltered [
 
 	| it |
 
@@ -47,7 +47,7 @@ SptCombinatorsTest >> testIteratorOnACollectedCollectionIsFiltered [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionIsFiltered [
+SptIteratorsTest >> testIteratorOnACollectionIsFiltered [
 
 	| it |
 
@@ -58,7 +58,7 @@ SptCombinatorsTest >> testIteratorOnACollectionIsFiltered [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionReturnsTheCollection [
+SptIteratorsTest >> testIteratorOnACollectionReturnsTheCollection [
 
 	| it |
 	it := SptCollectionIterator on: #(1 2 3).
@@ -66,7 +66,7 @@ SptCombinatorsTest >> testIteratorOnACollectionReturnsTheCollection [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionReturnsTheFirstValue [
+SptIteratorsTest >> testIteratorOnACollectionReturnsTheFirstValue [
 
 	| it |
 
@@ -75,7 +75,7 @@ SptCombinatorsTest >> testIteratorOnACollectionReturnsTheFirstValue [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionReturnsTheFirstValueAndSecondValue [
+SptIteratorsTest >> testIteratorOnACollectionReturnsTheFirstValueAndSecondValue [
 
 	| it |
 
@@ -85,7 +85,7 @@ SptCombinatorsTest >> testIteratorOnACollectionReturnsTheFirstValueAndSecondValu
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionWithCollectReturnsCorrectFirstValue [
+SptIteratorsTest >> testIteratorOnACollectionWithCollectReturnsCorrectFirstValue [
 
 	| it |
 
@@ -96,7 +96,7 @@ SptCombinatorsTest >> testIteratorOnACollectionWithCollectReturnsCorrectFirstVal
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionWithCollectReturnsCorrectValues [
+SptIteratorsTest >> testIteratorOnACollectionWithCollectReturnsCorrectValues [
 
 	| it |
 
@@ -107,7 +107,7 @@ SptCombinatorsTest >> testIteratorOnACollectionWithCollectReturnsCorrectValues [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionWithTwoCollectReturnsCorrectFirstValue [
+SptIteratorsTest >> testIteratorOnACollectionWithTwoCollectReturnsCorrectFirstValue [
 
 	| it |
 
@@ -118,7 +118,7 @@ SptCombinatorsTest >> testIteratorOnACollectionWithTwoCollectReturnsCorrectFirst
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testIteratorOnACollectionWithTwoCollectReturnsCorrectValues [
+SptIteratorsTest >> testIteratorOnACollectionWithTwoCollectReturnsCorrectValues [
 
 	| it |
 
@@ -129,7 +129,38 @@ SptCombinatorsTest >> testIteratorOnACollectionWithTwoCollectReturnsCorrectValue
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testSequenceDetectsAtEnd [
+SptIteratorsTest >> testNonDuplicatesRemoveDuplicates [
+
+	| it |
+	
+	it := (SptCollectionIterator on: #(1 1)) asWithoutDuplicates.
+	self assert: (it next:1) equals: #(1) asOrderedCollection
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testNonDuplicatesRemoveDuplicatesResetReturnsWithoutDuplicates [
+
+	| it |
+	
+	it := (SptCollectionIterator on: #(1 1 2 2 3 3)) asWithoutDuplicates.
+	self assert: (it next:3) equals: #(1 2 3) asOrderedCollection.
+	
+	it reset. 
+	
+	self assert: (it next:3) equals: #(1 2 3) asOrderedCollection 
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testNonDuplicatesRemoveDuplicatesWithThree [
+
+	| it |
+	
+	it := (SptCollectionIterator on: #(1 1 2 2 3 3)) asWithoutDuplicates.
+	self assert: (it next:3) equals: #(1 2 3) asOrderedCollection 
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testSequenceDetectsAtEnd [
 
 	| it |
 	it := (SptCollectionIterator on: #(1 2 3)) , (SptCollectionIterator on: #(4 5 6)).
@@ -143,7 +174,7 @@ SptCombinatorsTest >> testSequenceDetectsAtEnd [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testSequenceReturnsTheSequenceOfAllResults [
+SptIteratorsTest >> testSequenceReturnsTheSequenceOfAllResults [
 
 	| it |
 	it := (SptCollectionIterator on: #(1 2 3)) , (SptCollectionIterator on: #(4 5 6)).
@@ -152,7 +183,7 @@ SptCombinatorsTest >> testSequenceReturnsTheSequenceOfAllResults [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testSequenceReturnsTheSequenceOfAllResultsInParts [
+SptIteratorsTest >> testSequenceReturnsTheSequenceOfAllResultsInParts [
 
 	| it |
 	it := (SptCollectionIterator on: #(1 2 3)) , (SptCollectionIterator on: #(4 5 6)).
@@ -162,7 +193,7 @@ SptCombinatorsTest >> testSequenceReturnsTheSequenceOfAllResultsInParts [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testSubstringFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
+SptIteratorsTest >> testSubstringFilterDoesNotFetchTwiceIfTheFilterIsARefinementOfPreviousText [
 
 	| it |
 	it := (SptGeneratorBlockIterator on: [ :x | x value: '1bbb'; value:'11bbb1'; error ]) substringFilter: 'b'.
@@ -173,7 +204,7 @@ SptCombinatorsTest >> testSubstringFilterDoesNotFetchTwiceIfTheFilterIsARefineme
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testSubstringFilterReturnsValidResults [
+SptIteratorsTest >> testSubstringFilterReturnsValidResults [
 
 	| it |
 	it := (SptCollectionIterator on: { 'xxxaaa'. 'xxxbbb'. 'xxxccc' }) substringFilter: 'b'.
@@ -181,7 +212,7 @@ SptCombinatorsTest >> testSubstringFilterReturnsValidResults [
 ]
 
 { #category : #tests }
-SptCombinatorsTest >> testSubstringFilterReturnsValidResultsWithTheSameFilter [
+SptIteratorsTest >> testSubstringFilterReturnsValidResultsWithTheSameFilter [
 
 	| it |
 	it := (SptCollectionIterator on: { 'aaa'. 'xxxbbb'. 'ccc' }) substringFilter: 'b'.
