@@ -10,7 +10,22 @@ Class {
 { #category : #initialization }
 GTSpotterHelpBrick >> anotherSuggestion [
 
-	label text: (String loremIpsum: 50)
+	| suggestion |
+	suggestion := {
+		'Meta + n filters for Classes'.
+		'Meta + m filters for Implementros'.
+		'Meta + h filters for Help topics'.
+		'Adding #Classes in the query filters for Classes'.
+		'Adding #Implementors in the query filters for Implementros'.
+		'Adding #Help in the query filters for Help Topics'.
+		'Adding #Packages in the query filters for Packages'.
+		'Adding #Menu in the query filters for System Menu entries'.
+	} atRandom.
+	
+	[label text = suggestion] 
+		whileTrue: [ ^ self anotherSuggestion ].
+	
+	label text: suggestion.
 ]
 
 { #category : #initialization }
@@ -31,8 +46,9 @@ GTSpotterHelpBrick >> initialize [
 		hSpaceFill;
 		vSpaceFill;
 		marginTop: 2;		
-		marginLeft: 5;		
-		text: 'asdasds'.
+		marginLeft: 5.
+		
+	self anotherSuggestion.
 
 	self
 		hSpaceFill;
@@ -46,7 +62,7 @@ GTSpotterHelpBrick >> initialize [
 		margin: 0;
 		hintTitle: 'Show me';
 		hintText: 'another suggestion.';
-		normalImage: (self theme icons iconNamed: #glamorousRefresh);
+		normalImage: (self theme icons iconNamed: #glamorousHelp);
 		action: [ self anotherSuggestion ]
 		yourself.
 	
