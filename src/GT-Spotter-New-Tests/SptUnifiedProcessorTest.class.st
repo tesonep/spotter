@@ -50,6 +50,38 @@ SptUnifiedProcessorTest >> testFindThisMethodAfterAddingText [
 ]
 
 { #category : #tests }
+SptUnifiedProcessorTest >> testFindThisPackage [
+
+	self runForText: 'gt-spotter-new-tests'.
+	self assertResultsIncludes: self class package
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testFindThisPackageAfterAddingText [
+
+	self runForText: 'gt-spo'.
+	self runForText: 'gt-spotter-new-tests'.
+
+	self assertResultsIncludes: self class package
+	
+	
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testFindThisPackageWithCategory [
+
+	self runForText: '#Packages gt-spotter-new-tests'.
+	self assertResultsIncludes: self class package
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testFindThisPackageWithOtherCategory [
+
+	self runForText: '#Classes gt-spotter-new-tests'.
+	self denyResultsIncludes: self class package
+]
+
+{ #category : #tests }
 SptUnifiedProcessorTest >> testGTClassProcessorIsRemovedAfterUpdatingText [
 
 	self runForText: 'gtclass'.
@@ -59,9 +91,25 @@ SptUnifiedProcessorTest >> testGTClassProcessorIsRemovedAfterUpdatingText [
 ]
 
 { #category : #tests }
+SptUnifiedProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
+
+	self runForText: 'gt-spotter'.
+	self rerunWithText: 'gt-spotter-new-te'.
+	
+	self denyResultsIncludes: SptClassProcessor package
+]
+
+{ #category : #tests }
 SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResults [
 
 	self runForText: 'test'.
+	self assertQuantityOfResults: 20.
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResultsForPackage [
+
+	self runForText: '-Test'.
 	self assertQuantityOfResults: 20.
 ]
 
