@@ -32,3 +32,10 @@ SptImplementorsProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
 	self runForText: 'test'.
 	self assertQuantityOfResults: 10.
 ]
+
+{ #category : #tests }
+SptImplementorsProcessorTest >> testPopularStringDoesReturnOnlyTenResultsWithUppercase [
+
+	self runForText: 'Test'.
+	self assertQuantityOfResults: 10.
+]

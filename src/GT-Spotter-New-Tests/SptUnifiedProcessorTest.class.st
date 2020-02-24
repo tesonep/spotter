@@ -34,6 +34,22 @@ SptUnifiedProcessorTest >> testFindGTClassProcessorTestWithPartialText [
 ]
 
 { #category : #tests }
+SptUnifiedProcessorTest >> testFindThisMethod [
+
+	self runForText: 'testFindThisMethod'.
+	self assertResultsIncludes: thisContext method
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testFindThisMethodAfterAddingText [
+
+	self runForText: 'test'.
+	self runForText: 'testFindThisMethod'.
+	
+	self assertResultsIncludes: thisContext method
+]
+
+{ #category : #tests }
 SptUnifiedProcessorTest >> testGTClassProcessorIsRemovedAfterUpdatingText [
 
 	self runForText: 'gtclass'.
@@ -46,5 +62,12 @@ SptUnifiedProcessorTest >> testGTClassProcessorIsRemovedAfterUpdatingText [
 SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResults [
 
 	self runForText: 'test'.
+	self assertQuantityOfResults: 20.
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResultsWithCapital [
+
+	self runForText: 'Test'.
 	self assertQuantityOfResults: 20.
 ]
