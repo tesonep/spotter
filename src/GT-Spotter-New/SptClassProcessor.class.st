@@ -1,14 +1,17 @@
+"
+I am simple processor that iterates on the classes
+"
 Class {
 	#name : #SptClassProcessor,
-	#superclass : #SptSpotterProccessor,
+	#superclass : #SptSpotterProcessor,
 	#category : #'GT-Spotter-New-Processors'
 }
 
 { #category : #accessing }
-SptClassProcessor >> newSource [
+SptClassProcessor >> newTextFilteringSource [
 
-	^ (SptClassIterator new select: [:e | e isMeta not])
-		collect: [ :e | SptClassEntry on: e ]
+	^ ((SptClassIterator new select: [ :e | e isMeta not ])
+		collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
 ]
 
 { #category : #accessing }

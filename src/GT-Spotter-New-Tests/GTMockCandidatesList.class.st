@@ -48,6 +48,25 @@ GTMockCandidatesList >> onAmountChanged: aQuantity in: processor [
 	totalResults := aQuantity
 ]
 
+{ #category : #events }
+GTMockCandidatesList >> processorEnded: aSptClassProcessor [ 
+
+	
+]
+
+{ #category : #events }
+GTMockCandidatesList >> processorStarted: aSptClassProcessor [ 
+	
+	
+]
+
+{ #category : #accessing }
+GTMockCandidatesList >> reset [
+	
+	results removeAll.
+	totalResults := 0.
+]
+
 { #category : #accessing }
 GTMockCandidatesList >> results [
 	^ results

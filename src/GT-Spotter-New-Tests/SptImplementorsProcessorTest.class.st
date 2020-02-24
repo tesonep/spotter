@@ -1,24 +1,24 @@
 Class {
-	#name : #GTImplementorsProcessorTest,
-	#superclass : #AbstractGTProcessorTest,
+	#name : #SptImplementorsProcessorTest,
+	#superclass : #AbstractSptProcessorTest,
 	#category : #'GT-Spotter-New-Tests'
 }
 
 { #category : #tests }
-GTImplementorsProcessorTest >> processor [
+SptImplementorsProcessorTest >> processor [
 
 	^ SptImplementorsProcessor new
 ]
 
 { #category : #tests }
-GTImplementorsProcessorTest >> testFindThisMethod [
+SptImplementorsProcessorTest >> testFindThisMethod [
 
 	self runForText: 'testFindThisMethod'.
 	self assertResultsIncludes: thisContext method
 ]
 
 { #category : #tests }
-GTImplementorsProcessorTest >> testFindThisMethodAfterAddingText [
+SptImplementorsProcessorTest >> testFindThisMethodAfterAddingText [
 
 	self runForText: 'test'.
 	self runForText: 'testFindThisMethod'.
@@ -27,7 +27,7 @@ GTImplementorsProcessorTest >> testFindThisMethodAfterAddingText [
 ]
 
 { #category : #tests }
-GTImplementorsProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
+SptImplementorsProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
 
 	self runForText: 'test'.
 	self assertQuantityOfResults: 10.

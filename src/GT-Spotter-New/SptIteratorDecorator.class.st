@@ -1,3 +1,8 @@
+"
+I implement an abstract decorator for the implementors.
+I have an iterator in the inner instance variable and all the messages are redirected to it. 
+My subclasses can override the required behaviour.
+"
 Class {
 	#name : #SptIteratorDecorator,
 	#superclass : #SptIterator,
@@ -7,16 +12,16 @@ Class {
 	#category : #'GT-Spotter-New-Iterators'
 }
 
-{ #category : #initialization }
+{ #category : #testing }
 SptIteratorDecorator >> atEnd [ 
 
 	^ inner atEnd
 ]
 
-{ #category : #filtering }
-SptIteratorDecorator >> filteringText: aString [ 
+{ #category : #protected }
+SptIteratorDecorator >> doReset [ 
 	
-	inner filteringText: aString
+	inner reset
 ]
 
 { #category : #accessing }
@@ -24,14 +29,8 @@ SptIteratorDecorator >> inner: anObject [
 	inner := anObject
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 SptIteratorDecorator >> next [
 
 	^ inner next
-]
-
-{ #category : #initialization }
-SptIteratorDecorator >> reset [ 
-	
-	inner reset
 ]

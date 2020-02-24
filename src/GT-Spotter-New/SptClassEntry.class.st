@@ -1,3 +1,6 @@
+"
+I wrap a Class or Trait entry, to modify its behavior if required for the class
+"
 Class {
 	#name : #SptClassEntry,
 	#superclass : #SptEntry,
@@ -8,18 +11,4 @@ Class {
 SptClassEntry >> asString [
 
 	^ content name
-]
-
-{ #category : #accessing }
-SptClassEntry >> doEvaluate [
-
-	content browse
-]
-
-{ #category : #accessing }
-SptClassEntry >> render [ 
-
-	^ GTSpotterItemBrick new
-		icon: content systemIcon;
-		text: content gtDisplayString
 ]

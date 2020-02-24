@@ -1,13 +1,16 @@
+"
+I am simple processor that iterates on the implementors
+"
 Class {
 	#name : #SptImplementorsProcessor,
-	#superclass : #SptSpotterProccessor,
+	#superclass : #SptSpotterProcessor,
 	#category : #'GT-Spotter-New-Processors'
 }
 
 { #category : #filtering }
-SptImplementorsProcessor >> newSource [
+SptImplementorsProcessor >> newTextFilteringSource [
 
-	^ SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]
+	^ (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter
 ]
 
 { #category : #accessing }

@@ -1,31 +1,24 @@
 Class {
-	#name : #GTPackageProcessorTest,
-	#superclass : #AbstractGTProcessorTest,
+	#name : #SptPackageProcessorTest,
+	#superclass : #AbstractSptProcessorTest,
 	#category : #'GT-Spotter-New-Tests'
 }
 
 { #category : #tests }
-GTPackageProcessorTest >> processor [
+SptPackageProcessorTest >> processor [
 
 	^ SptPackageProcessor new
 ]
 
 { #category : #tests }
-GTPackageProcessorTest >> testFindKernelPackageWithPartialText [
-
-	self runForText: 'ker'.
-	self assertResultsIncludes: Object package
-]
-
-{ #category : #tests }
-GTPackageProcessorTest >> testFindThisPackage [
+SptPackageProcessorTest >> testFindThisPackage [
 
 	self runForText: 'gt-spotter-new-tests'.
 	self assertResultsIncludes: self class package
 ]
 
 { #category : #tests }
-GTPackageProcessorTest >> testFindThisPackageAfterAddingText [
+SptPackageProcessorTest >> testFindThisPackageAfterAddingText [
 
 	self runForText: 'gt-spo'.
 	self runForText: 'gt-spotter-new-tests'.
@@ -36,7 +29,7 @@ GTPackageProcessorTest >> testFindThisPackageAfterAddingText [
 ]
 
 { #category : #tests }
-GTPackageProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
+SptPackageProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 
 	self runForText: 'gt-spotter'.
 	self rerunWithText: 'gt-spotter-new-te'.
@@ -45,7 +38,7 @@ GTPackageProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 ]
 
 { #category : #tests }
-GTPackageProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
+SptPackageProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
 
 	self runForText: 'test'.
 	self assertQuantityOfResults: 10.

@@ -1,3 +1,8 @@
+"
+I implement the select: operation on the iterator.
+I apply the block and filter the elements returned by myself.
+
+"
 Class {
 	#name : #SptFilter,
 	#superclass : #SptIteratorBlockDecorator,

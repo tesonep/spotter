@@ -1,3 +1,9 @@
+"
+I wrap the return elements from the spotter processor. 
+As the processor returns different elements I add the behaviour required to show the element. 
+
+Also, I redirect the messages that should be answer by my content
+"
 Class {
 	#name : #SptEntry,
 	#superclass : #Object,
@@ -22,7 +28,7 @@ SptEntry >> = anEntry [
 		and: [ anEntry content = self content ]
 ]
 
-{ #category : #accessing }
+{ #category : #converting }
 SptEntry >> asString [ 
 
 	^ self subclassResponsibility 
@@ -39,19 +45,19 @@ SptEntry >> content: anObject [
 ]
 
 { #category : #accessing }
-SptEntry >> doEvaluate [.
+SptEntry >> doEvaluate [
 
-	self subclassResponsibility 
+	content browse
 ]
 
-{ #category : #accessing }
+{ #category : #evaluating }
 SptEntry >> evaluateFor: aGTSpotterStep [ 
 
 	self doEvaluate.
 	aGTSpotterStep exit.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'spotter-extensions' }
 SptEntry >> gtDisplayString [
 
 	^ content gtDisplayString
@@ -63,7 +69,7 @@ SptEntry >> hash [
 	^ content hash
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 SptEntry >> printOn: aStream [
 	aStream
 		<< self class name;
@@ -73,29 +79,31 @@ SptEntry >> printOn: aStream [
 ]
 
 { #category : #accessing }
-SptEntry >> render [
+SptEntry >> render [ 
 
-	^ self subclassResponsibility
+	^ GTSpotterItemBrick new
+		icon: content systemIcon;
+		text: content gtDisplayString
 ]
 
-{ #category : #accessing }
+{ #category : #'spotter-extensions' }
 SptEntry >> spotterActDefault [
 	^ content spotterActDefault 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'spotter-extensions' }
 SptEntry >> spotterPreviewIn: aComposite inContext: aSpotter [
 
 	^ content spotterPreviewCodeIn: aComposite
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'spotter-extensions' }
 SptEntry >> spotterProcessorsFor: aSpotterStep [
 
 	^ content spotterProcessorsFor: aSpotterStep
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'spotter-extensions' }
 SptEntry >> spotterProcessorsFor: aSpotterStep pragma: aPragma [
 
 	^ content spotterProcessorsFor: aSpotterStep pragma: aPragma

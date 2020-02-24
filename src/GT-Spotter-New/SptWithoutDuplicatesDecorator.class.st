@@ -1,3 +1,7 @@
+"
+I implement a decorator for the iterators. 
+I don't allow duplicates to be returned. For doing so, I have a collection of the already returned values, so I can filter duplicates.
+"
 Class {
 	#name : #SptWithoutDuplicatesDecorator,
 	#superclass : #SptIteratorDecorator,
@@ -15,6 +19,19 @@ SptWithoutDuplicatesDecorator class >> on: anInner [
 		yourself
 ]
 
+{ #category : #resetting }
+SptWithoutDuplicatesDecorator >> clearDuplicates [
+	
+	uniqueResults removeAll
+]
+
+{ #category : #protected }
+SptWithoutDuplicatesDecorator >> doReset [ 
+
+	inner reset.
+	self clearDuplicates
+]
+
 { #category : #initialization }
 SptWithoutDuplicatesDecorator >> initialize [ 
 
@@ -22,7 +39,7 @@ SptWithoutDuplicatesDecorator >> initialize [
 	uniqueResults := Set new.
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 SptWithoutDuplicatesDecorator >> next [
 
 	| aValue |
@@ -34,11 +51,4 @@ SptWithoutDuplicatesDecorator >> next [
 	uniqueResults add: aValue.
 	^ aValue
 	
-]
-
-{ #category : #initialization }
-SptWithoutDuplicatesDecorator >> reset [ 
-
-	inner reset.
-	uniqueResults removeAll.
 ]

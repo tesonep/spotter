@@ -1,3 +1,6 @@
+"
+I wrap an existing collection and expose it as a iterator
+"
 Class {
 	#name : #SptCollectionIterator,
 	#superclass : #SptGenericGenerator,
@@ -26,7 +29,7 @@ SptCollectionIterator >> collection: anObject [
 	collection := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #enumerating }
 SptCollectionIterator >> elementsDo: aValuable [
 
 	collection do: aValuable 

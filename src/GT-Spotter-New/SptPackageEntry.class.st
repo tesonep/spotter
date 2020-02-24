@@ -1,3 +1,6 @@
+"
+I wrap a RPackage entry, to modify its behavior if required for the class
+"
 Class {
 	#name : #SptPackageEntry,
 	#superclass : #SptEntry,
@@ -8,12 +11,6 @@ Class {
 SptPackageEntry >> asString [
 
 	^ content name
-]
-
-{ #category : #accessing }
-SptPackageEntry >> doEvaluate [
-
-	content browse
 ]
 
 { #category : #accessing }

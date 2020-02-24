@@ -1,8 +1,94 @@
+"
+I am a complex processor that unifies queries from: Classes, Implementors and Packages.
+I can handle filtering by categories, so to have different behavior when the query includes #Classes, #Packages, #Implementors.
+I configure the keymapping for the categories in spotter.
+
+My source is a complex one: 
+ 
+ - I will filter the duplicates out.
+ - I will configure it using the categories in the query.
+ - I have two behaviors, depending of the case of query. If it is uppercase, I will search first in implementors, then in classes and then in packages. If it is lowercase I will search in classes, packages and then implementors.
+ - I first search for matches starting with the query and then for matches with the query in any place of the entry.
+"
 Class {
 	#name : #SptUnifiedProcessor,
-	#superclass : #SptSpotterProccessor,
+	#superclass : #SptSpotterProcessor,
+	#instVars : [
+		'categories'
+	],
 	#category : #'GT-Spotter-New-Processors'
 }
+
+{ #category : #sources }
+SptUnifiedProcessor >> calculateLowercaseSourcesOn: anStream [
+
+	| implementorsBeginsWith implementorsSubstring |
+
+	(self categoriesIncludes: #Implementors) 
+		ifTrue: [
+			implementorsBeginsWith := (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asBeginsWithFilter.
+			implementorsSubstring := (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter.
+			
+			textFilteringIterators add: implementorsBeginsWith.
+			textFilteringIterators add: implementorsSubstring.
+			
+			anStream nextPut: implementorsBeginsWith.
+			anStream nextPut: implementorsSubstring ]
+
+]
+
+{ #category : #sources }
+SptUnifiedProcessor >> calculateUppercaseSourcesOn: anStream [
+
+	| classesBeginsWith classesIncludesString packagesBeginsWith packagesIncludesString |
+	(self categoriesIncludes: #Classes) 
+		ifTrue: [
+			classesBeginsWith := ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asBeginsWithFilter.			
+			textFilteringIterators add: classesBeginsWith.
+			anStream nextPut: classesBeginsWith ].
+
+	(self categoriesIncludes: #Packages) 
+		ifTrue: [
+			packagesBeginsWith := (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asBeginsWithFilter.			
+			textFilteringIterators add: packagesBeginsWith.
+			anStream nextPut: packagesBeginsWith ].
+
+	(self categoriesIncludes: #Classes) 
+		ifTrue: [
+			classesIncludesString := ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asSubstringFilter.			
+			textFilteringIterators add: classesIncludesString.
+			anStream nextPut: classesIncludesString ].
+		
+	(self categoriesIncludes: #Packages) 
+		ifTrue: [
+			packagesIncludesString := (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asSubstringFilter.		
+			textFilteringIterators add: packagesIncludesString.
+			anStream nextPut: packagesIncludesString]
+		
+
+]
+
+{ #category : #sources }
+SptUnifiedProcessor >> categoriesIncludes: aCategory [
+
+	^ categories isNil or: [ categories isEmpty or: [ categories includes: aCategory ] ] 
+]
+
+{ #category : #sources }
+SptUnifiedProcessor >> configureFilter [
+
+	(categories ~= self query categoriesSelected)
+		ifTrue: [
+			categories := self query categoriesSelected.
+			filter := nil].
+
+	super configureFilter.
+	
+	"I will clear the duplicates, as a new query have done"
+	filter clearDuplicates.
+	
+
+]
 
 { #category : #'key-bindings' }
 SptUnifiedProcessor >> installKeymappingsOn: aSpotterMorph [
@@ -25,19 +111,26 @@ SptUnifiedProcessor >> maxResults [
 	^ 20
 ]
 
-{ #category : #filtering }
+{ #category : #sources }
 SptUnifiedProcessor >> newSource [
 
-	^ SptCaseSelectorIterator new
-		lowercaseIterator: ( SptCategoryFilterIterator category: #Implementors for: 
-			((SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asBeginsWithFilter ,
-			(SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter ));
-		uppercaseIterator: (SptSequenceIterator with: {
-			SptCategoryFilterIterator category: #Classes for: ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asBeginsWithFilter.
-			SptCategoryFilterIterator category: #Packages for: (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asBeginsWithFilter.
-			SptCategoryFilterIterator category: #Classes for: ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asSubstringFilter.		
-			SptCategoryFilterIterator category: #Packages for: (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asSubstringFilter});
-		asWithoutDuplicates.
+	| uppercaseIterators lowercaseIterators caseSelectorIterator root |
+
+	textFilteringIterators := OrderedCollection new.
+
+	lowercaseIterators := OrderedCollection streamContents: [ :s | self calculateLowercaseSourcesOn: s].
+	uppercaseIterators := OrderedCollection streamContents: [ :s | self calculateUppercaseSourcesOn: s].
+
+	caseSelectorIterator := SptCaseSelectorIterator new 
+		lowercaseIterator: (SptSequenceIterator with: lowercaseIterators);
+		uppercaseIterator: (SptSequenceIterator with: uppercaseIterators).
+		
+	textFilteringIterators add: caseSelectorIterator.
+	
+	root := caseSelectorIterator asWithoutDuplicates.
+		
+	^ root
+
 
 
 ]

@@ -1,3 +1,6 @@
+"
+I wrap a CompiledMethod, to modify its behavior if required for the class
+"
 Class {
 	#name : #SptMethodEntry,
 	#superclass : #SptEntry,
@@ -8,18 +11,4 @@ Class {
 SptMethodEntry >> asString [
 
 	^ content selector
-]
-
-{ #category : #accessing }
-SptMethodEntry >> doEvaluate [
-
-	content browse
-]
-
-{ #category : #accessing }
-SptMethodEntry >> render [ 
-
-	^ GTSpotterItemBrick new
-		icon: content systemIcon;
-		text: content gtDisplayString
 ]

@@ -1,13 +1,16 @@
+"
+I am simple processor that iterates on the packages in the system
+"
 Class {
 	#name : #SptPackageProcessor,
-	#superclass : #SptSpotterProccessor,
+	#superclass : #SptSpotterProcessor,
 	#category : #'GT-Spotter-New-Processors'
 }
 
 { #category : #filtering }
-SptPackageProcessor >> newSource [
+SptPackageProcessor >> newTextFilteringSource [
 
-	^ SptPackageIterator new collect: [ :e | SptClassEntry on: e ]
+	^ (SptPackageIterator new collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
 ]
 
 { #category : #accessing }

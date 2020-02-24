@@ -1,3 +1,6 @@
+"
+I implement a simple block decorator, I am a abstract class that have a block.
+"
 Class {
 	#name : #SptIteratorBlockDecorator,
 	#superclass : #SptIteratorDecorator,

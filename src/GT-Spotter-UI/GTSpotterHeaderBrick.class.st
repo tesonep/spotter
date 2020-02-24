@@ -101,6 +101,7 @@ GTSpotterHeaderBrick >> newHelpButton [
 GTSpotterHeaderBrick >> newSearchField [
 
 	^ GLMRubTextFieldBrick new
+
 ]
 
 { #category : #'instance creation' }

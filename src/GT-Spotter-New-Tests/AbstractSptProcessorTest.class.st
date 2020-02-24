@@ -1,5 +1,5 @@
 Class {
-	#name : #AbstractGTProcessorTest,
+	#name : #AbstractSptProcessorTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'text',
@@ -12,39 +12,41 @@ Class {
 }
 
 { #category : #asserting }
-AbstractGTProcessorTest >> assertQuantityOfResults: anInteger [ 
+AbstractSptProcessorTest >> assertQuantityOfResults: anInteger [ 
 	
 	self assert: candidates results size equals: anInteger
 ]
 
 { #category : #asserting }
-AbstractGTProcessorTest >> assertResultsIncludes: anElement [ 
+AbstractSptProcessorTest >> assertResultsIncludes: anElement [ 
 	
 	self assert: ((candidates results collect: #content) includes: anElement)
 ]
 
 { #category : #asserting }
-AbstractGTProcessorTest >> denyResultsIncludes: anElement [ 
+AbstractSptProcessorTest >> denyResultsIncludes: anElement [ 
 
 	self deny: ((candidates results collect: #content) includes: anElement )
 ]
 
 { #category : #tests }
-AbstractGTProcessorTest >> processor [
+AbstractSptProcessorTest >> processor [
 
 	^ self subclassResponsibility 
 ]
 
 { #category : #testing }
-AbstractGTProcessorTest >> rerunWithText: aText [ 
+AbstractSptProcessorTest >> rerunWithText: aText [ 
 	
 	text := aText.
+	context search: aText.
 	context text: aText.
+	candidates reset.
 	processor filterInContext: context
 ]
 
 { #category : #tests }
-AbstractGTProcessorTest >> runForText: aText [
+AbstractSptProcessorTest >> runForText: aText [
 
 	candidates := GTMockCandidatesList new.
 	text := aText.

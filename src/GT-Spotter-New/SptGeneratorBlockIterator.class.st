@@ -1,3 +1,6 @@
+"
+I wrap a block and expose it as an iterator
+"
 Class {
 	#name : #SptGeneratorBlockIterator,
 	#superclass : #SptGenericGenerator,
@@ -26,7 +29,7 @@ SptGeneratorBlockIterator >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #enumerating }
 SptGeneratorBlockIterator >> elementsDo: aValuable [
 
 	block value: aValuable

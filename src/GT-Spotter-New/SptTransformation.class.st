@@ -1,3 +1,8 @@
+"
+I implement the collect: operation on the iterator.
+I apply the block and transform the elements returned by myself.
+
+"
 Class {
 	#name : #SptTransformation,
 	#superclass : #SptIteratorBlockDecorator,

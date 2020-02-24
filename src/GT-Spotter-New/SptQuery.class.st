@@ -1,3 +1,14 @@
+"
+I am the reification of a Spotter query.
+I know how to parse the search string and returns the categories selected (#Classes, #Implementors, etc) and the look up string.
+I also handle how to return the results to spotter and how to update the searching morph when a category change.
+
+I am updated from a Spotter context (updateFromContext:), and I update the search bar with #updateSearchingMorph.
+
+The processors talk with me to add results to the query, and later show them (#addResult: #informAllResultAmount:).
+
+I am also configurable to filter classes, implementors or add another modified.
+"
 Class {
 	#name : #SptQuery,
 	#superclass : #Object,
@@ -23,17 +34,17 @@ SptQuery >> addResult: anEntry [
 { #category : #accessing }
 SptQuery >> categoriesSelected [
 
-	^ modifiers 
+	^ modifiers copy
 ]
 
-{ #category : #results }
+{ #category : #configuring }
 SptQuery >> filterClasses [
 
 	modifiers add: #Classes.
 	self updateSearchingMorph
 ]
 
-{ #category : #results }
+{ #category : #configuring }
 SptQuery >> filterImplementors [
 
 	modifiers add: #Implementors.
@@ -49,7 +60,7 @@ SptQuery >> informAllResultAmount: anInteger [
 	
 ]
 
-{ #category : #results }
+{ #category : #initialization }
 SptQuery >> initialize [
 
 	super initialize.
@@ -103,11 +114,11 @@ SptQuery >> updateFromContext: aGTSpotterContext [
 			(aPart beginsWith: '#')
 				ifTrue: [ modifiers add: aPart allButFirst asSymbol. ]
 				ifFalse: [ query := (query , ' ' , aPart) trimBoth ] ].
-			
+	
 	spotterContext := aGTSpotterContext
 ]
 
-{ #category : #results }
+{ #category : #updating }
 SptQuery >> updateSearchingMorph [
 
 	self processor spotterMorph updateText: self textInSearchBar

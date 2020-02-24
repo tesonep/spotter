@@ -296,7 +296,8 @@ GTSpotterMorph >> paneBrick: aBrick [
 		
 	self themer spotterThemer spotterPaneStyleFor: paneBrick.
 
-	self addBrickBack: paneBrick
+	self addBrickBack: paneBrick.
+
 ]
 
 { #category : #private }

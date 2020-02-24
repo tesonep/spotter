@@ -1,3 +1,12 @@
+"
+I implement a decorator that is useful with the string comparison.
+I implement a selection based in the first letter of the filteringText.
+I have two iterators inside, one for lowercase and other for uppercase text.
+
+If the text starts with a lowercase letter, I will iterate the values first from the lowercase, and the from the uppercase.
+If the text starts with an uppercase letter, I will iterate the values first from the uppercase, and the from the lowercase.
+
+"
 Class {
 	#name : #SptCaseSelectorIterator,
 	#superclass : #SptIteratorDecorator,
@@ -9,9 +18,10 @@ Class {
 }
 
 { #category : #filtering }
-SptCaseSelectorIterator >> categoriesSelected: categories [ 
+SptCaseSelectorIterator >> doReset [
 
-	inner categoriesSelected: categories
+	lowercaseIterator reset.
+	uppercaseIterator reset.
 ]
 
 { #category : #filtering }
@@ -23,8 +33,6 @@ SptCaseSelectorIterator >> filteringText: aString [
 	inner := aString first isLowercase
 		ifTrue: [ lowercaseIterator , uppercaseIterator ]
 		ifFalse: [ uppercaseIterator , lowercaseIterator ].
-		
-	inner filteringText: aString
 ]
 
 { #category : #accessing }
