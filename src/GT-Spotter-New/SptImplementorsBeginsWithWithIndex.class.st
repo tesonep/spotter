@@ -34,7 +34,7 @@ SptImplementorsBeginsWithWithIndex >> calculateIndex [
 SptImplementorsBeginsWithWithIndex >> elementsDo: aValuable [
 
 	| node |
-	node := self index findBegining: text.
+	node := self index findPrefix: text.
 	node ifNil:[^self].
 
 	node withAllChildrenDo: [:e | 
