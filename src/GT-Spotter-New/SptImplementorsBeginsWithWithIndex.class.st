@@ -4,14 +4,14 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#classVars : [
-		'Index'
+	#classInstVars : [
+		'index'
 	],
 	#category : #'GT-Spotter-New-Iterators'
 }
 
 { #category : #enumerating }
-SptImplementorsBeginsWithWithIndex >> calculateIndex [
+SptImplementorsBeginsWithWithIndex class >> calculateIndex [
 	| anIndex |
 	anIndex := CTTrie new.
 
@@ -19,15 +19,36 @@ SptImplementorsBeginsWithWithIndex >> calculateIndex [
 		allBehaviorsDo: [ :aClass | 
 			aClass
 				methodsDo: [ :e | 
-					anIndex
-						add: e selector asLowercase
-						valueWithBlock: [ :aString :previousValue | 
-							| value |
-							value := previousValue ifNil: [ OrderedCollection new ].
-							value add: e.
-							value ] ] ].
+					anIndex 
+						at: e selector asLowercase 
+						update: [ :methods | methods , { e } ] 
+						initial: [ {e} ] ]].
 				
 	^ anIndex
+]
+
+{ #category : #initialization }
+SptImplementorsBeginsWithWithIndex class >> generateIndex [
+
+	index := self calculateIndex
+]
+
+{ #category : #initialization }
+SptImplementorsBeginsWithWithIndex class >> index [
+
+	^ index ifNil: [ index := self calculateIndex ]
+]
+
+{ #category : #initialization }
+SptImplementorsBeginsWithWithIndex class >> isIndexHealthy [
+
+	^ index isNil or: [ index isCompressed ]
+]
+
+{ #category : #initialization }
+SptImplementorsBeginsWithWithIndex class >> reset [ 
+	
+	index := nil
 ]
 
 { #category : #enumerating }
@@ -51,7 +72,7 @@ SptImplementorsBeginsWithWithIndex >> filteringText: aString [
 { #category : #enumerating }
 SptImplementorsBeginsWithWithIndex >> index [
 
-	^ Index ifNil: [ Index := self calculateIndex ]
+	^ self class index
 ]
 
 { #category : #initialization }

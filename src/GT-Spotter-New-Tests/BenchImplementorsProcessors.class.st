@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #benchmarking }
-BenchImplementorsProcessors >> bench [
-	<script: 'self new bench'>
+BenchImplementorsProcessors >> benchBeginsWith [
+	<script: 'self new benchBeginsWith'>
 
 	"Ensure index is calculated"
 	| withIndex withoutIndex |
@@ -40,4 +40,24 @@ BenchImplementorsProcessors >> benchSearchOf: aString withIndex: withIndex witho
 			<< 'Without Index:'; 
 			<< (results at: 2); cr.
 
+]
+
+{ #category : #benchmarking }
+BenchImplementorsProcessors >> benchSubstringWith [
+	<script: 'self new benchSubstringWith'>
+
+	"Ensure index is calculated"
+	| withIndex withoutIndex |
+	withIndex := SptImplementorsSubstringWithIndex new.
+	withIndex index.
+
+	withoutIndex := (SptImplementorsIterator new
+		collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter.
+		
+	(String streamContents: [ :aWriteStream | 
+			self benchSearchOf: 'as' withIndex: withIndex withoutIndex: withoutIndex on: aWriteStream.
+			self benchSearchOf: 'asUrl' withIndex: withIndex withoutIndex: withoutIndex on: aWriteStream.
+			self benchSearchOf: 'asdfghjkli' withIndex: withIndex withoutIndex: withoutIndex on: aWriteStream.
+			self benchSearchOf: 'test' withIndex: withIndex withoutIndex: withoutIndex on: aWriteStream.
+		]) inspect.	
 ]
