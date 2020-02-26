@@ -13,7 +13,7 @@ Class {
 { #category : #enumerating }
 SptImplementorsBeginsWithWithIndex class >> calculateIndex [
 	| anIndex |
-	anIndex := CTTrie new.
+	anIndex := self trieClass new.
 
 	SystemNavigation default
 		allBehaviorsDo: [ :aClass | 
@@ -49,6 +49,12 @@ SptImplementorsBeginsWithWithIndex class >> isIndexHealthy [
 SptImplementorsBeginsWithWithIndex class >> reset [ 
 	
 	index := nil
+]
+
+{ #category : #enumerating }
+SptImplementorsBeginsWithWithIndex class >> trieClass [
+
+	^ CTOptimizedTrie 
 ]
 
 { #category : #enumerating }

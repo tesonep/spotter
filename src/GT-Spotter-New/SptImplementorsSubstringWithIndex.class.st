@@ -7,7 +7,7 @@ Class {
 { #category : #enumerating }
 SptImplementorsSubstringWithIndex class >> calculateIndex [
 	| anIndex |
-	anIndex := CTSuffixTree new.
+	anIndex := self trieClass new.
 
 	SystemNavigation default
 		allBehaviorsDo: [ :aClass | 
@@ -19,4 +19,10 @@ SptImplementorsSubstringWithIndex class >> calculateIndex [
 						initial: [ {e} ] ] ].
 
 	^ anIndex
+]
+
+{ #category : #enumerating }
+SptImplementorsSubstringWithIndex class >> trieClass [
+
+	^ CTSuffixTree
 ]
