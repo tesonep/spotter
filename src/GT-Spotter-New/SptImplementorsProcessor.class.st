@@ -7,10 +7,22 @@ Class {
 	#category : #'GT-Spotter-New-Processors'
 }
 
+{ #category : #'default-settings' }
+SptImplementorsProcessor class >> defaultEnabled [
+
+	^ false
+]
+
 { #category : #filtering }
 SptImplementorsProcessor >> newTextFilteringSource [
 
 	^ (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter
+]
+
+{ #category : #accessing }
+SptImplementorsProcessor >> order [
+	
+	^ 10
 ]
 
 { #category : #accessing }

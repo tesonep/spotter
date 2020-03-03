@@ -7,8 +7,19 @@ Class {
 	#category : #'GT-Spotter-New-Entries'
 }
 
-{ #category : #accessing }
+{ #category : #converting }
 SptClassEntry >> asString [
 
 	^ content name
+]
+
+{ #category : #evaluating }
+SptClassEntry >> doEvaluate [
+	content browse
+]
+
+{ #category : #evaluating }
+SptClassEntry >> icon [
+
+	^ content systemIcon
 ]

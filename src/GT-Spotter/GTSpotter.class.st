@@ -544,6 +544,20 @@ GTSpotter >> setText: aText from: aView [
 	^ true
 ]
 
+{ #category : #'processors-discovery' }
+GTSpotter >> spotterProcessorsFor: aSpotterStep [
+
+	| processors |
+
+	processors := SptSpotterProcessor allSubclasses
+		select: [ :e | e isEnabled ]
+		thenCollect: [ :e | e new ].
+
+	processors sort: [ :a :b | a order < b order ].
+		
+	processors do: [ :e | e configureOn: aSpotterStep ].
+]
+
 { #category : #accessing }
 GTSpotter >> steps [
 

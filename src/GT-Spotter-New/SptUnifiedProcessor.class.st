@@ -19,6 +19,12 @@ Class {
 	#category : #'GT-Spotter-New-Processors'
 }
 
+{ #category : #'default-settings' }
+SptUnifiedProcessor class >> defaultEnabled [
+
+	^ true
+]
+
 { #category : #sources }
 SptUnifiedProcessor >> calculateLowercaseSourcesOn: anStream [
 
@@ -105,6 +111,13 @@ SptUnifiedProcessor >> installKeymappingsOn: aSpotterMorph [
 	
 ]
 
+{ #category : #'spotter-api' }
+SptUnifiedProcessor >> isRelevantForQuery: aString [ 
+	
+	"I will handle... I am old enough"
+	^ true
+]
+
 { #category : #filtering }
 SptUnifiedProcessor >> maxResults [
 
@@ -133,6 +146,12 @@ SptUnifiedProcessor >> newSource [
 
 
 
+]
+
+{ #category : #accessing }
+SptUnifiedProcessor >> order [
+	
+	^ 10
 ]
 
 { #category : #filtering }

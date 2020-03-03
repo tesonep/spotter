@@ -7,8 +7,28 @@ Class {
 	#category : #'GT-Spotter-New-Entries'
 }
 
-{ #category : #accessing }
+{ #category : #converting }
 SptMethodEntry >> asString [
 
 	^ content selector
+]
+
+{ #category : #evaluating }
+SptMethodEntry >> doEvaluate [
+
+	^ content browse
+]
+
+{ #category : #evaluating }
+SptMethodEntry >> icon [
+
+	^ content systemIcon
+]
+
+{ #category : #showing }
+SptMethodEntry >> render [ 
+
+	^ GTSpotterItemBrick new
+		icon: self icon;
+		text: content printString
 ]

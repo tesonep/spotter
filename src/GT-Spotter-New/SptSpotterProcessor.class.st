@@ -26,6 +26,23 @@ Class {
 	#category : #'GT-Spotter-New-Processors'
 }
 
+{ #category : #'default-settings' }
+SptSpotterProcessor class >> defaultEnabled [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : #testing }
+SptSpotterProcessor class >> isEnabled [
+
+	^ self isAbstract not and: [self defaultEnabled]
+]
+
+{ #category : #compatibility }
+SptSpotterProcessor >> actLogic [
+	^ [ :anItem :aStep | anItem evaluateFor: aStep ]
+]
+
 { #category : #'spotter-api' }
 SptSpotterProcessor >> actOn: anEntry for: aGTSpotterStep [ 
 
@@ -47,6 +64,12 @@ SptSpotterProcessor >> configureFilter [
 		e filteringText: self query searchingText]
 ]
 
+{ #category : #configuring }
+SptSpotterProcessor >> configureOn: aGTSpotterStep [ 
+
+	^ aGTSpotterStep addProcessor: self
+]
+
 { #category : #filtering }
 SptSpotterProcessor >> ensureFilter [
 
@@ -57,7 +80,7 @@ SptSpotterProcessor >> ensureFilter [
 { #category : #filtering }
 SptSpotterProcessor >> executeQuery [
 
-	(self query isSearchEmpty) 
+	(self query isSearchEmpty and: [self showForEmptyQuery not]) 
 		ifTrue: [ ^ self ].
 	
 	self configureFilter.
@@ -93,6 +116,13 @@ SptSpotterProcessor >> filterInContext: aSpotterContext [
 
 ]
 
+{ #category : #'spotter-api' }
+SptSpotterProcessor >> initialize [
+
+	super initialize.
+	running := false.
+]
+
 { #category : #'key-bindings' }
 SptSpotterProcessor >> installKeymappingsOn: aGTSpotterMorph [ 
 	
@@ -100,16 +130,32 @@ SptSpotterProcessor >> installKeymappingsOn: aGTSpotterMorph [
 ]
 
 { #category : #'spotter-api' }
-SptSpotterProcessor >> isRelevantForQuery: aString [ 
-	
-	"I will handle... I am old enough"
-	^ true
+SptSpotterProcessor >> isRelevantForQuery: categoryQueryPrefix [
+
+	^ (self title asLowercase copyReplaceAll: String space with: '')
+			beginsWith: categoryQueryPrefix
 ]
 
 { #category : #'spotter-api' }
 SptSpotterProcessor >> isRunning [ 
 
 	^ running
+]
+
+{ #category : #compatibility }
+SptSpotterProcessor >> itemFilterName [
+
+	^ self title
+]
+
+{ #category : #compatibility }
+SptSpotterProcessor >> itemIcon [
+	^ [ :anItem | anItem icon ]
+]
+
+{ #category : #compatibility }
+SptSpotterProcessor >> itemName [
+	^ [ :anItem | anItem asString ]
 ]
 
 { #category : #'key-bindings' }
@@ -165,12 +211,7 @@ SptSpotterProcessor >> notifyStarted: aSpotterContext [
 { #category : #accessing }
 SptSpotterProcessor >> order [
 	
-	^ order
-]
-
-{ #category : #accessing }
-SptSpotterProcessor >> order: anObject [
-	order := anObject
+	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }
@@ -183,6 +224,12 @@ SptSpotterProcessor >> query [
 SptSpotterProcessor >> render: anEntry [
 		
 	^ anEntry render
+]
+
+{ #category : #configuration }
+SptSpotterProcessor >> showForEmptyQuery [
+
+	^ false
 ]
 
 { #category : #accessing }

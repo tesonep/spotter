@@ -44,10 +44,10 @@ SptEntry >> content: anObject [
 	content := anObject
 ]
 
-{ #category : #accessing }
-SptEntry >> doEvaluate [
+{ #category : #evaluating }
+SptEntry >> doEvaluate [ 
 
-	content browse
+	self subclassResponsibility 
 ]
 
 { #category : #evaluating }
@@ -60,13 +60,19 @@ SptEntry >> evaluateFor: aGTSpotterStep [
 { #category : #'spotter-extensions' }
 SptEntry >> gtDisplayString [
 
-	^ content gtDisplayString
+	^ self asString
 ]
 
 { #category : #comparing }
 SptEntry >> hash [
 
 	^ content hash
+]
+
+{ #category : #accessing }
+SptEntry >> icon [
+	
+	^ self subclassResponsibility
 ]
 
 { #category : #printing }
@@ -78,12 +84,12 @@ SptEntry >> printOn: aStream [
 		<< ' )'
 ]
 
-{ #category : #accessing }
+{ #category : #showing }
 SptEntry >> render [ 
 
 	^ GTSpotterItemBrick new
-		icon: content systemIcon;
-		text: content gtDisplayString
+		icon: self icon;
+		text: self asString
 ]
 
 { #category : #'spotter-extensions' }

@@ -7,16 +7,19 @@ Class {
 	#category : #'GT-Spotter-New-Entries'
 }
 
-{ #category : #accessing }
+{ #category : #converting }
 SptPackageEntry >> asString [
 
 	^ content name
 ]
 
-{ #category : #accessing }
-SptPackageEntry >> render [ 
+{ #category : #evaluating }
+SptPackageEntry >> doEvaluate [
 
-	^ GTSpotterItemBrick new
-		icon: (Smalltalk ui theme iconNamed: #package);
-		text: content name
+	content browse
+]
+
+{ #category : #showing }
+SptPackageEntry >> icon [
+	^ Smalltalk ui theme iconNamed: #package
 ]
