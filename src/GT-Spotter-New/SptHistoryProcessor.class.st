@@ -11,6 +11,18 @@ SptHistoryProcessor class >> defaultEnabled [
 ]
 
 { #category : #accessing }
+SptHistoryProcessor class >> order [
+	
+	^ 8
+]
+
+{ #category : #accessing }
+SptHistoryProcessor class >> title [
+
+	^ 'History'
+]
+
+{ #category : #accessing }
 SptHistoryProcessor >> collection [
 
 	^ GTSpotter history reject: [ :e | e isNil ]
@@ -22,20 +34,8 @@ SptHistoryProcessor >> newEntryOn: anElement [
 	^ anElement
 ]
 
-{ #category : #accessing }
-SptHistoryProcessor >> order [
-	
-	^ 8
-]
-
 { #category : #configuration }
 SptHistoryProcessor >> showForEmptyQuery [
 
 	^ true
-]
-
-{ #category : #accessing }
-SptHistoryProcessor >> title [
-
-	^ 'History'
 ]

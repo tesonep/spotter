@@ -1,7 +1,7 @@
 Class {
 	#name : #SptImplementorsSubstringWithIndex,
 	#superclass : #SptImplementorsBeginsWithWithIndex,
-	#category : #'GT-Spotter-New-Iterators'
+	#category : #'GT-Spotter-New-Indexes'
 }
 
 { #category : #enumerating }

@@ -41,5 +41,5 @@ SptPackageProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 SptPackageProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
 
 	self runForText: 'test'.
-	self assertQuantityOfResults: 10.
+	self assertQuantityOfResults: 25.
 ]

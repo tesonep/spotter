@@ -10,6 +10,18 @@ SptWindowsProcessor class >> defaultEnabled [
 	^ true
 ]
 
+{ #category : #accessing }
+SptWindowsProcessor class >> order [
+	
+	^ 5
+]
+
+{ #category : #accessing }
+SptWindowsProcessor class >> title [
+
+	^ 'Windows'
+]
+
 { #category : #filtering }
 SptWindowsProcessor >> collection [
 
@@ -22,20 +34,8 @@ SptWindowsProcessor >> newEntryOn: anElement [
 	^ SptWindowEntry on: anElement
 ]
 
-{ #category : #accessing }
-SptWindowsProcessor >> order [
-	
-	^ 5
-]
-
 { #category : #configuration }
 SptWindowsProcessor >> showForEmptyQuery [
 
 	^ true
-]
-
-{ #category : #accessing }
-SptWindowsProcessor >> title [
-
-	^ 'Windows'
 ]

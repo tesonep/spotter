@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'index'
 	],
-	#category : #'GT-Spotter-New-Iterators'
+	#category : #'GT-Spotter-New-Indexes'
 }
 
 { #category : #enumerating }

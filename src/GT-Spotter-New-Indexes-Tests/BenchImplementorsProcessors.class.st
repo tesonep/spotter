@@ -1,7 +1,7 @@
 Class {
 	#name : #BenchImplementorsProcessors,
 	#superclass : #Object,
-	#category : #'GT-Spotter-New-Tests'
+	#category : #'GT-Spotter-New-Indexes-Tests'
 }
 
 { #category : #benchmarking }

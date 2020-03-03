@@ -23,8 +23,23 @@ Class {
 		'running',
 		'textFilteringIterators'
 	],
+	#classInstVars : [
+		'enabled'
+	],
 	#category : #'GT-Spotter-New-Processors'
 }
+
+{ #category : #accessing }
+SptSpotterProcessor class >> allConcreteSubclasses [
+	
+	^ self allSubclasses reject: [ :e | e isAbstract ]
+]
+
+{ #category : #accessing }
+SptSpotterProcessor class >> allEnabledSubclasses [
+	
+	^ self allSubclasses select: [ :e | e isEnabled ]
+]
 
 { #category : #'default-settings' }
 SptSpotterProcessor class >> defaultEnabled [
@@ -32,10 +47,75 @@ SptSpotterProcessor class >> defaultEnabled [
 	^ self subclassResponsibility 
 ]
 
+{ #category : #settings }
+SptSpotterProcessor class >> enabled [ 
+
+	^ enabled ifNil: [ self defaultEnabled ]
+]
+
+{ #category : #settings }
+SptSpotterProcessor class >> enabled: aValue [
+
+	enabled := aValue
+]
+
+{ #category : #settings }
+SptSpotterProcessor class >> hideInSettings [
+
+	^ false
+]
+
 { #category : #testing }
 SptSpotterProcessor class >> isEnabled [
 
-	^ self isAbstract not and: [self defaultEnabled]
+	self isAbstract
+		ifTrue: [ ^ false ].
+	^ enabled ifNil: [ self defaultEnabled ] ifNotNil: [ enabled ]
+]
+
+{ #category : #accessing }
+SptSpotterProcessor class >> order [
+	
+	^ self subclassResponsibility 
+]
+
+{ #category : #settings }
+SptSpotterProcessor class >> settingsDescription [
+
+	^ self title
+]
+
+{ #category : #settings }
+SptSpotterProcessor class >> settingsOn: aBuilder [
+	<systemsettings>
+
+	(aBuilder group: #spotterProcessors)
+		parent: #spotter;
+		label: 'Sources';
+		description: 'It configures the sources that are queried when using spotter'.
+
+	self allConcreteSubclasses reject: [:e | e hideInSettings ] thenDo: [ :aProcessorClass | 
+		(aBuilder setting: aProcessorClass name , '_enabled')
+			parent: #spotterProcessors;
+			default: aProcessorClass defaultEnabled;
+			getSelector: #enabled;
+			setSelector: #enabled:;
+			target: aProcessorClass;
+			description: aProcessorClass settingsDescription;
+			label: aProcessorClass settingsTitle
+	].
+]
+
+{ #category : #settings }
+SptSpotterProcessor class >> settingsTitle [
+
+	^ self title
+]
+
+{ #category : #accessing }
+SptSpotterProcessor class >> title [
+	
+	^ self subclassResponsibility 
 ]
 
 { #category : #compatibility }
@@ -166,7 +246,7 @@ SptSpotterProcessor >> keyBinding [
 { #category : #configuration }
 SptSpotterProcessor >> maxResults [
 
-	^ 10
+	^ GTSpotterProcessor defaultItemsLimit 
 ]
 
 { #category : #filtering }
@@ -210,8 +290,8 @@ SptSpotterProcessor >> notifyStarted: aSpotterContext [
 
 { #category : #accessing }
 SptSpotterProcessor >> order [
-	
-	^ self subclassResponsibility 
+
+	^ self class order
 ]
 
 { #category : #accessing }
@@ -240,5 +320,5 @@ SptSpotterProcessor >> spotterMorph [
 { #category : #accessing }
 SptSpotterProcessor >> title [
 
-	^ self subclassResponsibility
+	^ self class title
 ]

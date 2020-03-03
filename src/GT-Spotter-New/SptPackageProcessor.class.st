@@ -13,19 +13,26 @@ SptPackageProcessor class >> defaultEnabled [
 	^ false
 ]
 
-{ #category : #filtering }
-SptPackageProcessor >> newTextFilteringSource [
+{ #category : #settings }
+SptPackageProcessor class >> hideInSettings [
 
-	^ (SptPackageIterator new collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
+	"I am hidden because the implementation in the unified processor is richer"
+	^ true
 ]
 
 { #category : #accessing }
-SptPackageProcessor >> order [
+SptPackageProcessor class >> order [
 	
 	^ 10
 ]
 
 { #category : #accessing }
-SptPackageProcessor >> title [
+SptPackageProcessor class >> title [
 	^ 'Packages'
+]
+
+{ #category : #filtering }
+SptPackageProcessor >> newTextFilteringSource [
+
+	^ (SptPackageIterator new collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
 ]

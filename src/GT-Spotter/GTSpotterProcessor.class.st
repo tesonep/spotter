@@ -9,8 +9,37 @@ Class {
 		'order',
 		'running'
 	],
+	#classVars : [
+		'DefaultItemsLimit'
+	],
 	#category : #'GT-Spotter-Processors'
 }
+
+{ #category : #'accessing-defaults' }
+GTSpotterProcessor class >> defaultItemsLimit [
+
+	^ DefaultItemsLimit ifNil: [ DefaultItemsLimit := 25 ]
+]
+
+{ #category : #'accessing-defaults' }
+GTSpotterProcessor class >> defaultItemsLimit: aValue [
+
+	DefaultItemsLimit := aValue
+]
+
+{ #category : #'accessing-defaults' }
+GTSpotterProcessor class >> settingsOn: aBuilder [
+	<systemsettings>
+
+	(aBuilder setting: #defaultItemsLimit)
+		target: self;
+		parent: #spotter;
+		label: 'Number of results per category';
+		default: 25;
+		order: 100;
+		description:
+			'Number of results per category to show in Spotter'
+]
 
 { #category : #public }
 GTSpotterProcessor >> actOn: anObject for: aStep [

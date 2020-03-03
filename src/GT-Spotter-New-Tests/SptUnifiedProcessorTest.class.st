@@ -103,19 +103,19 @@ SptUnifiedProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResults [
 
 	self runForText: 'test'.
-	self assertQuantityOfResults: 20.
+	self assertQuantityOfResults: 25.
 ]
 
 { #category : #tests }
 SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResultsForPackage [
 
 	self runForText: '-Test'.
-	self assertQuantityOfResults: 20.
+	self assertQuantityOfResults: 25.
 ]
 
 { #category : #tests }
 SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResultsWithCapital [
 
 	self runForText: 'Test'.
-	self assertQuantityOfResults: 20.
+	self assertQuantityOfResults: 25.
 ]

@@ -10,6 +10,18 @@ SptHelpProcessor class >> defaultEnabled [
 	^ true
 ]
 
+{ #category : #accessing }
+SptHelpProcessor class >> order [
+	
+	^ 200
+]
+
+{ #category : #accessing }
+SptHelpProcessor class >> title [
+
+	^ 'Help topics'
+]
+
 { #category : #filtering }
 SptHelpProcessor >> collection [
 
@@ -32,19 +44,7 @@ SptHelpProcessor >> newEntryOn: anElement [
 ]
 
 { #category : #accessing }
-SptHelpProcessor >> order [
-	
-	^ 200
-]
-
-{ #category : #accessing }
 SptHelpProcessor >> showForEmptyQuery [ 
 
 	^ true
-]
-
-{ #category : #accessing }
-SptHelpProcessor >> title [
-
-	^ 'Help topics'
 ]

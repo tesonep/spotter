@@ -13,21 +13,28 @@ SptClassProcessor class >> defaultEnabled [
 	^ false
 ]
 
-{ #category : #accessing }
-SptClassProcessor >> newTextFilteringSource [
+{ #category : #settings }
+SptClassProcessor class >> hideInSettings [
 
-	^ ((SptClassIterator new select: [ :e | e isMeta not ])
-		collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
+	"I am hidden because the implementation in the unified processor is richer"
+	^ true
 ]
 
 { #category : #accessing }
-SptClassProcessor >> order [
+SptClassProcessor class >> order [
 	
 	^ 10
 ]
 
 { #category : #accessing }
-SptClassProcessor >> title [
+SptClassProcessor class >> title [
 
 	^ 'Classes'
+]
+
+{ #category : #accessing }
+SptClassProcessor >> newTextFilteringSource [
+
+	^ ((SptClassIterator new select: [ :e | e isMeta not ])
+		collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
 ]

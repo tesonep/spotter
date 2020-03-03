@@ -30,12 +30,12 @@ SptImplementorsProcessorTest >> testFindThisMethodAfterAddingText [
 SptImplementorsProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
 
 	self runForText: 'test'.
-	self assertQuantityOfResults: 10.
+	self assertQuantityOfResults: 25.
 ]
 
 { #category : #tests }
 SptImplementorsProcessorTest >> testPopularStringDoesReturnOnlyTenResultsWithUppercase [
 
 	self runForText: 'Test'.
-	self assertQuantityOfResults: 10.
+	self assertQuantityOfResults: 25.
 ]

@@ -46,5 +46,5 @@ SptClassProcessorTest >> testGTClassProcessorIsRemovedAfterUpdatingText [
 SptClassProcessorTest >> testPopularStringDoesReturnOnlyTenResults [
 
 	self runForText: 'test'.
-	self assertQuantityOfResults: 10.
+	self assertQuantityOfResults: 25.
 ]

@@ -25,6 +25,30 @@ SptUnifiedProcessor class >> defaultEnabled [
 	^ true
 ]
 
+{ #category : #accessing }
+SptUnifiedProcessor class >> order [
+	
+	^ 10
+]
+
+{ #category : #settings }
+SptUnifiedProcessor class >> settingsDescription [
+
+	^ 'I am the main processor: I show classes, packages and implementors'
+]
+
+{ #category : #settings }
+SptUnifiedProcessor class >> settingsTitle [
+
+	^ 'Classes, Implementors & Packages'
+]
+
+{ #category : #filtering }
+SptUnifiedProcessor class >> title [
+
+	^ 'Results'
+]
+
 { #category : #sources }
 SptUnifiedProcessor >> calculateLowercaseSourcesOn: anStream [
 
@@ -118,12 +142,6 @@ SptUnifiedProcessor >> isRelevantForQuery: aString [
 	^ true
 ]
 
-{ #category : #filtering }
-SptUnifiedProcessor >> maxResults [
-
-	^ 20
-]
-
 { #category : #sources }
 SptUnifiedProcessor >> newSource [
 
@@ -146,16 +164,4 @@ SptUnifiedProcessor >> newSource [
 
 
 
-]
-
-{ #category : #accessing }
-SptUnifiedProcessor >> order [
-	
-	^ 10
-]
-
-{ #category : #filtering }
-SptUnifiedProcessor >> title [
-
-	^ 'Results'
 ]

@@ -93,11 +93,39 @@ GTSpotter class >> on: anObject [
 ]
 
 { #category : #accessing }
+GTSpotter class >> previewVisible [
+
+	^ self isPreviewVisible 
+]
+
+{ #category : #accessing }
+GTSpotter class >> previewVisible: aValue [
+
+	isPreviewVisible := aValue
+]
+
+{ #category : #accessing }
 GTSpotter class >> resetHistory [
 	"
 	self resetHistory
 	"
 	^ history := nil
+]
+
+{ #category : #testing }
+GTSpotter class >> settingsOn: aBuilder [
+	<systemsettings>
+	(aBuilder group: #spotter)
+		parent: #tools;
+		label: 'Spotter';
+		description: 'Spotter configuration'.
+
+	(aBuilder setting: #previewVisible)
+		parent: #spotter;
+		default: false;
+		target: self;
+		description: 'If Spotter will show the preview panel on the right of spotter';
+		label: 'Show Preview Panel'.
 ]
 
 { #category : #accessing }
@@ -549,9 +577,7 @@ GTSpotter >> spotterProcessorsFor: aSpotterStep [
 
 	| processors |
 
-	processors := SptSpotterProcessor allSubclasses
-		select: [ :e | e isEnabled ]
-		thenCollect: [ :e | e new ].
+	processors := SptSpotterProcessor allEnabledSubclasses	collect: [ :e | e new ].
 
 	processors sort: [ :a :b | a order < b order ].
 		

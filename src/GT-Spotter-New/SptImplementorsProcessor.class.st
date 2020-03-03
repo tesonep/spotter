@@ -13,20 +13,27 @@ SptImplementorsProcessor class >> defaultEnabled [
 	^ false
 ]
 
-{ #category : #filtering }
-SptImplementorsProcessor >> newTextFilteringSource [
+{ #category : #'default-settings' }
+SptImplementorsProcessor class >> hideInSettings [
 
-	^ (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter
+	"I am hidden because the implementation in the unified processor is richer"
+	^ true
 ]
 
 { #category : #accessing }
-SptImplementorsProcessor >> order [
+SptImplementorsProcessor class >> order [
 	
 	^ 10
 ]
 
 { #category : #accessing }
-SptImplementorsProcessor >> title [
+SptImplementorsProcessor class >> title [
 
 	^ 'Implementors'
+]
+
+{ #category : #filtering }
+SptImplementorsProcessor >> newTextFilteringSource [
+
+	^ (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter
 ]

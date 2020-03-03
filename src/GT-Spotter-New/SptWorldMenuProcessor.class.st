@@ -10,6 +10,18 @@ SptWorldMenuProcessor class >> defaultEnabled [
 	^ true
 ]
 
+{ #category : #accessing }
+SptWorldMenuProcessor class >> order [
+	
+	^ 9
+]
+
+{ #category : #accessing }
+SptWorldMenuProcessor class >> title [
+
+	^ 'Menu'
+]
+
 { #category : #filtering }
 SptWorldMenuProcessor >> newTextFilteringSource [
 
@@ -18,20 +30,8 @@ SptWorldMenuProcessor >> newTextFilteringSource [
 		collect: [ :e | SptWorldMenuEntry on: e ]) asSubstringFilter
 ]
 
-{ #category : #accessing }
-SptWorldMenuProcessor >> order [
-	
-	^ 9
-]
-
 { #category : #configuration }
 SptWorldMenuProcessor >> showForEmptyQuery [
 
 	^ true
-]
-
-{ #category : #accessing }
-SptWorldMenuProcessor >> title [
-
-	^ 'Menu'
 ]

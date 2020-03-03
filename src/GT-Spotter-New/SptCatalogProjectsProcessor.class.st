@@ -7,7 +7,19 @@ Class {
 { #category : #'default-settings' }
 SptCatalogProjectsProcessor class >> defaultEnabled [
 
-	^ true
+	^ false
+]
+
+{ #category : #accessing }
+SptCatalogProjectsProcessor class >> order [
+	
+	^ 90
+]
+
+{ #category : #accessing }
+SptCatalogProjectsProcessor class >> title [
+
+	^ 'Catalog Projects'
 ]
 
 { #category : #filtering }
@@ -20,16 +32,4 @@ SptCatalogProjectsProcessor >> collection [
 SptCatalogProjectsProcessor >> newEntryOn: anElement [
 
 	^ SptCatalogProjectEntry on: anElement
-]
-
-{ #category : #accessing }
-SptCatalogProjectsProcessor >> order [
-	
-	^ 90
-]
-
-{ #category : #accessing }
-SptCatalogProjectsProcessor >> title [
-
-	^ 'Catalog Projects'
 ]
