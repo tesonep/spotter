@@ -11,6 +11,12 @@ Class {
 	#category : #'GT-Spotter-New-Tests'
 }
 
+{ #category : #testing }
+AbstractSptProcessorTest class >> isAbstract [ 
+
+	^ self == AbstractSptProcessorTest
+]
+
 { #category : #asserting }
 AbstractSptProcessorTest >> assertQuantityOfResults: anInteger [ 
 	
@@ -64,4 +70,11 @@ AbstractSptProcessorTest >> runForText: aText [
 	processor := self processor.
 			
 	processor filterInContext: context.
+]
+
+{ #category : #tests }
+AbstractSptProcessorTest >> testSearchingInvalidTextDoesNotReturnResult [
+
+	self runForText: 'assdsadasdsada'.
+	self assert: candidates results isEmpty
 ]

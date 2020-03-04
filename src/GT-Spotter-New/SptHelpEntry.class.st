@@ -1,3 +1,6 @@
+"
+I wrap a HelpTopic entry, to modify its behavior if required for the spotter
+"
 Class {
 	#name : #SptHelpEntry,
 	#superclass : #SptEntry,

@@ -1,3 +1,6 @@
+"
+I wrap a World menu entry, to modify its behavior if required for the spotter
+"
 Class {
 	#name : #SptWorldMenuEntry,
 	#superclass : #SptEntry,

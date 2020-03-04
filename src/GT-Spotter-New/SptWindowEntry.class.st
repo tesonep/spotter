@@ -1,3 +1,6 @@
+"
+I wrap a Window, to modify its behavior if required for the spotter
+"
 Class {
 	#name : #SptWindowEntry,
 	#superclass : #SptEntry,

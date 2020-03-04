@@ -1,3 +1,6 @@
+"
+I am a simple processor that returns all the world menu entries. 
+"
 Class {
 	#name : #SptWorldMenuProcessor,
 	#superclass : #SptSpotterProcessor,

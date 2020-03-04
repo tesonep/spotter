@@ -1,3 +1,6 @@
+"
+I am a processor to get all the windows open in the world. It filters out the top most window
+"
 Class {
 	#name : #SptWindowsProcessor,
 	#superclass : #SptCollectionBasedProcessor,
@@ -25,7 +28,7 @@ SptWindowsProcessor class >> title [
 { #category : #filtering }
 SptWindowsProcessor >> collection [
 
-	^ (self currentWorld submorphs 	select: [ :window | window isKindOf: SystemWindow ] ) allButFirst
+	^ (self currentWorld submorphs select: [ :window | window isKindOf: SystemWindow ] ) allButFirst
 ]
 
 { #category : #filtering }

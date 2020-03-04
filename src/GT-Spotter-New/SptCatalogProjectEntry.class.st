@@ -1,3 +1,6 @@
+"
+I wrap a CatalogProject entry, to modify its behavior if required for the spotter
+"
 Class {
 	#name : #SptCatalogProjectEntry,
 	#superclass : #SptEntry,
