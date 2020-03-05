@@ -1,3 +1,6 @@
+"
+I am an abstract processor that is used when the results collection already exists or this is really cheap to calculate.
+"
 Class {
 	#name : #SptCollectionBasedProcessor,
 	#superclass : #SptSpotterProcessor,

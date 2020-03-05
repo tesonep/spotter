@@ -1,3 +1,6 @@
+"
+I am a processor that shows all the entries in the spotter history.
+"
 Class {
 	#name : #SptHistoryProcessor,
 	#superclass : #SptCollectionBasedProcessor,

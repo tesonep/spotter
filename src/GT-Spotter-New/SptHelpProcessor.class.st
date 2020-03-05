@@ -1,3 +1,6 @@
+"
+I am a processor that gets all the help topics in the system.
+"
 Class {
 	#name : #SptHelpProcessor,
 	#superclass : #SptCollectionBasedProcessor,
