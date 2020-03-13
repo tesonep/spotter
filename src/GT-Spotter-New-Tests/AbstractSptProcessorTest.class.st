@@ -72,6 +72,20 @@ AbstractSptProcessorTest >> runForText: aText [
 	processor filterInContext: context.
 ]
 
+{ #category : #running }
+AbstractSptProcessorTest >> setUp [ 
+	
+	super setUp.
+	SptSourceFactory forTest.
+]
+
+{ #category : #running }
+AbstractSptProcessorTest >> tearDown [ 
+
+	SptSourceFactory reset.
+	super tearDown.
+]
+
 { #category : #tests }
 AbstractSptProcessorTest >> testSearchingInvalidTextDoesNotReturnResult [
 

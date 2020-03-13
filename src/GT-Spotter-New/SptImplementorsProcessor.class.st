@@ -35,5 +35,5 @@ SptImplementorsProcessor class >> title [
 { #category : #filtering }
 SptImplementorsProcessor >> newTextFilteringSource [
 
-	^ (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter
+	^ SptSourceFactory current implementorsSubstringSource
 ]

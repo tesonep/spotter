@@ -35,6 +35,5 @@ SptClassProcessor class >> title [
 { #category : #accessing }
 SptClassProcessor >> newTextFilteringSource [
 
-	^ ((SptClassIterator new select: [ :e | e isMeta not ])
-		collect: [ :e | SptClassEntry on: e ]) asSubstringFilter
+	^ SptSourceFactory current classesSubstringSource
 ]

@@ -56,8 +56,8 @@ SptUnifiedProcessor >> calculateLowercaseSourcesOn: anStream [
 
 	(self categoriesIncludes: #Implementors) 
 		ifTrue: [
-			implementorsBeginsWith := (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asBeginsWithFilter.
-			implementorsSubstring := (SptImplementorsIterator new collect: [ :e | SptMethodEntry on: e ]) asSubstringFilter.
+			implementorsBeginsWith := SptSourceFactory current implementorsBeginsWithSource.
+			implementorsSubstring := SptSourceFactory current implementorsSubstringSource.
 			
 			textFilteringIterators add: implementorsBeginsWith.
 			textFilteringIterators add: implementorsSubstring.
@@ -73,7 +73,7 @@ SptUnifiedProcessor >> calculateUppercaseSourcesOn: anStream [
 	| classesBeginsWith classesIncludesString packagesBeginsWith packagesIncludesString |
 	(self categoriesIncludes: #Classes) 
 		ifTrue: [
-			classesBeginsWith := ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asBeginsWithFilter.			
+			classesBeginsWith := SptSourceFactory current classesBeginsWithSource.			
 			textFilteringIterators add: classesBeginsWith.
 			anStream nextPut: classesBeginsWith ].
 
@@ -85,7 +85,7 @@ SptUnifiedProcessor >> calculateUppercaseSourcesOn: anStream [
 
 	(self categoriesIncludes: #Classes) 
 		ifTrue: [
-			classesIncludesString := ((SptClassIterator new select: [:e | e isMeta not]) collect: [ :e | SptClassEntry on: e ]) asSubstringFilter.			
+			classesIncludesString := SptSourceFactory current classesSubstringSource.
 			textFilteringIterators add: classesIncludesString.
 			anStream nextPut: classesIncludesString ].
 		
