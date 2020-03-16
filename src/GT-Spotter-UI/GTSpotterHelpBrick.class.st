@@ -1,13 +1,17 @@
+"
+I am brick responsible to show the help bar in the bottom of the spotter window.
+"
 Class {
 	#name : #GTSpotterHelpBrick,
 	#superclass : #GLMBrick,
 	#instVars : [
-		'label'
+		'label',
+		'spotter'
 	],
 	#category : #'GT-Spotter-UI-Widgets'
 }
 
-{ #category : #initialization }
+{ #category : #actions }
 GTSpotterHelpBrick >> anotherSuggestion [
 
 	| suggestion |
@@ -20,6 +24,10 @@ GTSpotterHelpBrick >> anotherSuggestion [
 		'Adding #Help in the query filters for Help Topics'.
 		'Adding #Packages in the query filters for Packages'.
 		'Adding #Menu in the query filters for System Menu entries'.
+		'Using words separated with spaces looks up for all of them'.
+		'Using camel case looks up for all of the parts'.
+		'Clicking in the question mark shows another tip'.
+		'Clicking in this tip shows another tip'.
 	} atRandom.
 	
 	[label text = suggestion] 
@@ -37,35 +45,74 @@ GTSpotterHelpBrick >> color: aColor [
 
 { #category : #initialization }
 GTSpotterHelpBrick >> initialize [
-
-	| btn |
+	| btn advanceSearch |
 	super initialize.
-	label := GLMLabelBrick new
-		color: Color lightBlue;
-		textPosition: #left;
-		hSpaceFill;
-		vSpaceFill;
-		marginTop: 2;		
-		marginLeft: 5.
-		
-	self anotherSuggestion.
 
 	self
 		hSpaceFill;
 		vSpaceFill.
 
+	label := self newSuggestionLabel.
+	btn := self newSuggestionButton.
+	advanceSearch := self newAdvancedSearchLink.
+
+	self addBrickBack: btn.
 	self addBrickBack: label.
+	self addBrickBack: advanceSearch.
 	
-	btn := GLMHintableActionButtonBrick new
+	self anotherSuggestion.
+
+]
+
+{ #category : #'initialization - widgets' }
+GTSpotterHelpBrick >> newAdvancedSearchLink [
+	| aBrick |
+	aBrick := (GTLinkLabelMorph contents: 'Advanced Search...')
+		setBalloonText: 'Perform an advanced search in the image';
+		onClick: [ self openFinder ];
+		asBrick.		
+	
+	aBrick
+		width: 108;
+		vSpaceFill;
+		marginTop: 4.
+
+	^ aBrick
+]
+
+{ #category : #'initialization - widgets' }
+GTSpotterHelpBrick >> newSuggestionButton [
+	^ GLMHintableActionButtonBrick new
 		vSpaceFill;
 		width: [ :m | m height ];
 		margin: 0;
 		hintTitle: 'Show me';
 		hintText: 'another suggestion.';
 		normalImage: (self theme icons iconNamed: #glamorousHelp);
-		action: [ self anotherSuggestion ]
-		yourself.
-	
-	self addBrickBack: btn
+		action: [ self anotherSuggestion ];
+		yourself
+]
 
+{ #category : #'initialization - widgets' }
+GTSpotterHelpBrick >> newSuggestionLabel [
+	^ GLMLabelBrick new
+		textPosition: #left;
+		hSpaceFill;
+		vSpaceFill;
+		marginTop: 4;
+		enable;
+		when: #onClicked do: [ self anotherSuggestion ]
+]
+
+{ #category : #actions }
+GTSpotterHelpBrick >> openFinder [
+
+	spotter exit.
+	Finder open
+]
+
+{ #category : #initialization }
+GTSpotterHelpBrick >> spotter: anObject [
+
+	spotter := anObject
 ]

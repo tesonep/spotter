@@ -87,6 +87,8 @@ GTSpotterContentsBrick >> newHeaderBrick [
 GTSpotterContentsBrick >> newHelpBrick [
 
 	^ GTSpotterHelpBrick new
+			spotter: spotterModel;
+			yourself
 		
 
 ]
