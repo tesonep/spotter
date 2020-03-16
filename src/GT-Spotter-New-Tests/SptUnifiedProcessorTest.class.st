@@ -100,6 +100,34 @@ SptUnifiedProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 ]
 
 { #category : #tests }
+SptUnifiedProcessorTest >> testLookingForStoreDiskLowercaseReturnsThisMethod [
+
+	self runForText: 'store disk'.
+	self assertResultsIncludes: self class >> #testLookingForStoreDiskLowercaseReturnsThisMethod
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testLookingForStoreDiskReturnsDiskStore [
+
+	self runForText: 'StoreDisk'.
+	self assertResultsIncludes: DiskStore
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testLookingForStoreDiskWithSpaceReturnsDiskStore [
+
+	self runForText: 'Store Disk'.
+	self assertResultsIncludes: DiskStore
+]
+
+{ #category : #tests }
+SptUnifiedProcessorTest >> testLookingForStoreLowercaseReturnsDiskStore [
+
+	self runForText: 'store disk'.
+	self assertResultsIncludes: DiskStore
+]
+
+{ #category : #tests }
 SptUnifiedProcessorTest >> testPopularStringDoesReturnOnlyTwentyResults [
 
 	self runForText: 'test'.

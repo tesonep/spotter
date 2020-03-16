@@ -52,25 +52,28 @@ SptUnifiedProcessor class >> title [
 { #category : #sources }
 SptUnifiedProcessor >> calculateLowercaseSourcesOn: anStream [
 
-	| implementorsBeginsWith implementorsSubstring |
+	| implementorsBeginsWith implementorsSubstring wordsAwareImplementors |
 
 	(self categoriesIncludes: #Implementors) 
 		ifTrue: [
 			implementorsBeginsWith := SptSourceFactory current implementorsBeginsWithSource.
 			implementorsSubstring := SptSourceFactory current implementorsSubstringSource.
+			wordsAwareImplementors := SptWordsAwareFilter new inner: (SptSourceFactory current implementorsSubstringSource); yourself.
 			
 			textFilteringIterators add: implementorsBeginsWith.
 			textFilteringIterators add: implementorsSubstring.
+			textFilteringIterators add: wordsAwareImplementors.
 			
 			anStream nextPut: implementorsBeginsWith.
-			anStream nextPut: implementorsSubstring ]
+			anStream nextPut: implementorsSubstring.
+			anStream nextPut: wordsAwareImplementors ]
 
 ]
 
 { #category : #sources }
 SptUnifiedProcessor >> calculateUppercaseSourcesOn: anStream [
 
-	| classesBeginsWith classesIncludesString packagesBeginsWith packagesIncludesString |
+	| classesBeginsWith classesIncludesString packagesBeginsWith packagesIncludesString wordsAwareClassesSource wordsAwarePackageSource |
 	(self categoriesIncludes: #Classes) 
 		ifTrue: [
 			classesBeginsWith := SptSourceFactory current classesBeginsWithSource.			
@@ -93,8 +96,19 @@ SptUnifiedProcessor >> calculateUppercaseSourcesOn: anStream [
 		ifTrue: [
 			packagesIncludesString := (SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asSubstringFilter.		
 			textFilteringIterators add: packagesIncludesString.
-			anStream nextPut: packagesIncludesString]
+			anStream nextPut: packagesIncludesString].
 		
+	(self categoriesIncludes: #Classes) 
+		ifTrue: [
+			wordsAwareClassesSource := SptWordsAwareFilter new inner: (SptSourceFactory current classesSubstringSource); yourself.
+			textFilteringIterators add: wordsAwareClassesSource.
+			anStream nextPut: wordsAwareClassesSource ].
+
+	(self categoriesIncludes: #Packages) 
+		ifTrue: [
+			wordsAwarePackageSource := SptWordsAwareFilter new inner: ((SptPackageIterator new collect: [ :e | SptPackageEntry on: e ]) asSubstringFilter); yourself.
+			textFilteringIterators add: wordsAwarePackageSource.
+			anStream nextPut: wordsAwarePackageSource ].
 
 ]
 

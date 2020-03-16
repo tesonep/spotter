@@ -220,3 +220,115 @@ SptIteratorsTest >> testSubstringFilterReturnsValidResultsWithTheSameFilter [
 	
 	self assert: it next equals: 'xxxbbb'
 ]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersByASequenceOfCamelCase [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyybbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'xxxBbb'.
+	
+	self assert: it next equals: 'xxxyyybbb'.
+	self assert: it next equals: 'xxxcccbbb'	
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersByASequenceOfCamelCaseMixingCase [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyyBBB'. 'XXXcccbbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'xxxBbb'.
+	
+	self assert: it next equals: 'xxxyyyBBB'.
+	self assert: it next equals: 'XXXcccbbb'.
+	self assert: it next equals: 'xxxcccbbb'	
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersByASequenceOfCamelCaseWithUppercase [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyybbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'XxxBbb'.
+	
+	self assert: it next equals: 'xxxyyybbb'.
+	self assert: it next equals: 'xxxcccbbb'	
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersByASequenceOfWords [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyybbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'xxx bbb'.
+	
+	self assert: it next equals: 'xxxyyybbb'.
+	self assert: it next equals: 'xxxcccbbb'	
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersByASingleWord [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyybbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'xxx'.
+	
+	self assert: it next equals: 'xxxyyybbb'.
+	self assert: it next equals: 'xxxcccbbb'	
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersByASingleWordFindingNothing [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyybbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'zzz'.
+	
+	self assert: it next equals: nil
+]
+
+{ #category : #tests }
+SptIteratorsTest >> testWordsAwareIteratorFiltersLeftOutBecauseSecondWord [
+
+	| inner it |
+	
+	inner := (SptCollectionIterator on: { 'aaa'. 'xxxyyybbb'. 'xxxcccbbb' }) asSubstringFilter.
+	it := SptWordsAwareFilter new
+		inner: inner;
+		yourself.
+		
+	it filteringText: 'xxx aaa'.
+	
+	self assert: it next equals: nil.
+
+]
