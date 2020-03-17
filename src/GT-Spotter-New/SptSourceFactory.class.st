@@ -31,7 +31,7 @@ SptSourceFactory class >> defaultSourceFactory [
 { #category : #accessing }
 SptSourceFactory class >> forTest [
 
-	Current := SptDefaultSourceFactory new
+	Current := self new
 ]
 
 { #category : #'detecting implementations' }
@@ -50,4 +50,28 @@ SptSourceFactory class >> priority [
 SptSourceFactory class >> reset [
 
 	Current := nil
+]
+
+{ #category : #'sources - classes' }
+SptSourceFactory >> classesBeginsWithSource [
+
+	 ^ self subclassResponsibility 
+]
+
+{ #category : #'sources - classes' }
+SptSourceFactory >> classesSubstringSource [
+
+	 ^ self subclassResponsibility 
+]
+
+{ #category : #'sources - implementors' }
+SptSourceFactory >> implementorsBeginsWithSource [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'sources - implementors' }
+SptSourceFactory >> implementorsSubstringSource [
+
+	^ self subclassResponsibility
 ]

@@ -76,7 +76,7 @@ AbstractSptProcessorTest >> runForText: aText [
 AbstractSptProcessorTest >> setUp [ 
 	
 	super setUp.
-	SptSourceFactory forTest.
+	SptDefaultSourceFactory forTest.
 ]
 
 { #category : #running }

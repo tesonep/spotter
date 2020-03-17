@@ -14,7 +14,7 @@ SptClassProcessorTest >> processor [
 SptClassProcessorTest >> testFindGTClassProcessorTest [
 
 	self runForText: 'sptclassprocessortest'.
-	self assertResultsIncludes: self class
+	self assertResultsIncludes: SptClassProcessorTest
 ]
 
 { #category : #tests }
@@ -23,14 +23,14 @@ SptClassProcessorTest >> testFindGTClassProcessorTestAfterAddingTest [
 	self runForText: 'sptclass'.
 	self rerunWithText: 'sptclassprocess'.
 	
-	self assertResultsIncludes: self class
+	self assertResultsIncludes: SptClassProcessorTest 
 ]
 
 { #category : #tests }
 SptClassProcessorTest >> testFindGTClassProcessorTestWithPartialText [
 
 	self runForText: 'sptclass'.
-	self assertResultsIncludes: self class
+	self assertResultsIncludes: SptClassProcessorTest
 ]
 
 { #category : #tests }

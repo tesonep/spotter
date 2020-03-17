@@ -14,7 +14,7 @@ SptUnifiedProcessorTest >> processor [
 SptUnifiedProcessorTest >> testFindGTClassProcessorTest [
 
 	self runForText: 'sptunifiedprocessortest'.
-	self assertResultsIncludes: self class
+	self assertResultsIncludes: SptUnifiedProcessorTest
 ]
 
 { #category : #tests }
@@ -53,7 +53,7 @@ SptUnifiedProcessorTest >> testFindThisMethodAfterAddingText [
 SptUnifiedProcessorTest >> testFindThisPackage [
 
 	self runForText: 'gt-spotter-new-tests'.
-	self assertResultsIncludes: self class package
+	self assertResultsIncludes: SptUnifiedProcessorTest package
 ]
 
 { #category : #tests }
@@ -62,7 +62,7 @@ SptUnifiedProcessorTest >> testFindThisPackageAfterAddingText [
 	self runForText: 'gt-spo'.
 	self runForText: 'gt-spotter-new-tests'.
 
-	self assertResultsIncludes: self class package
+	self assertResultsIncludes: SptUnifiedProcessorTest package
 	
 	
 ]
@@ -71,7 +71,7 @@ SptUnifiedProcessorTest >> testFindThisPackageAfterAddingText [
 SptUnifiedProcessorTest >> testFindThisPackageWithCategory [
 
 	self runForText: '#Packages gt-spotter-new-tests'.
-	self assertResultsIncludes: self class package
+	self assertResultsIncludes: SptUnifiedProcessorTest package
 ]
 
 { #category : #tests }
@@ -100,10 +100,17 @@ SptUnifiedProcessorTest >> testGTSpotterNewIsRemovedAfterAddingText [
 ]
 
 { #category : #tests }
+SptUnifiedProcessorTest >> testLookingForDiskStoreWithSpaceReturnsDiskStore [
+
+	self runForText: 'Disk Store'.
+	self assertResultsIncludes: DiskStore
+]
+
+{ #category : #tests }
 SptUnifiedProcessorTest >> testLookingForStoreDiskLowercaseReturnsThisMethod [
 
 	self runForText: 'store disk'.
-	self assertResultsIncludes: self class >> #testLookingForStoreDiskLowercaseReturnsThisMethod
+	self assertResultsIncludes: SptUnifiedProcessorTest >> #testLookingForStoreDiskLowercaseReturnsThisMethod
 ]
 
 { #category : #tests }
