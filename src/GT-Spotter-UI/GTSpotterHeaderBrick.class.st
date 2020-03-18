@@ -243,3 +243,10 @@ GTSpotterHeaderBrick >> spotterModel: aModel [
 	self spotterModel announcer when: GTSpotterRevealHints send: #onRevealHints to: self.
 	self spotterModel announcer when: GTSpotterHideHints send: #onHideHints to: self.
 ]
+
+{ #category : #'event handling' }
+GTSpotterHeaderBrick >> takeKeyboardFocus [
+	
+	searchField morph takeKeyboardFocus
+
+]

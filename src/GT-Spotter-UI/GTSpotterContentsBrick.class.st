@@ -131,3 +131,9 @@ GTSpotterContentsBrick >> spotterModel: aModel [
 
 	spotterModel announcer when: GTSpotterStepAdded send: #onStepAdded to: self.
 ]
+
+{ #category : #'events-processing' }
+GTSpotterContentsBrick >> takeKeyboardFocus [
+
+	self headerBrick takeKeyboardFocus
+]
