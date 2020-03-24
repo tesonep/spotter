@@ -14,6 +14,10 @@ BaselineOfSpotter >> baseline: spec [
 			spec postLoadDoIt: #postload:package:.
 
 			spec
+				baseline: 'VMTunning'
+				with: [ spec repository: 'github://tesonep/pharo-vm-tunning/src' ].
+
+			spec
 				baseline: 'Aleph'
 				with: [ spec repository: 'github://estebanlm/aleph/src' ].
 
@@ -29,7 +33,7 @@ BaselineOfSpotter >> baseline: spec [
 
 				package: 'GT-Spotter-New-Tests' with: [ spec requires: #('GT-Spotter-New')];
 				package: 'GT-Spotter-New-Indexes' 
-					with: [ spec requires: #('Aleph' 'GT-Spotter-New')];
+					with: [ spec requires: #('VMTunning' 'Aleph' 'GT-Spotter-New')];
 				package: 'GT-Spotter-New-Indexes-Tests' 
 					with: [ spec requires: #('GT-Spotter-New-Indexes')].
 					
@@ -41,11 +45,7 @@ BaselineOfSpotter >> baseline: spec [
 { #category : #baselines }
 BaselineOfSpotter >> postload: loader package: packageSpec [
 
-	"Checking if the indexes have been installed"
-	| indexManagerClass |
-	(Smalltalk at: #SptSourceWithIndexFactory ifAbsent: [^self]).
-	
-	indexManagerClass := Smalltalk at: #AlpIndexManager.
-	indexManagerClass activate.
-	indexManagerClass current rebuildAll.
+	Smalltalk
+		at: #SptSourceWithIndexFactory
+		ifPresent: [ :sourceWithIndexFactory | sourceWithIndexFactory buildIndexes ]
 ]

@@ -10,6 +10,13 @@ Class {
 }
 
 { #category : #'detecting implementations' }
+SptSourceWithIndexFactory class >> buildIndexes [
+	AlpIndexManager activate.
+	GCConfiguration forLargeObjectAllocation
+		activeDuring: [ AlpIndexManager current rebuildAll ]
+]
+
+{ #category : #'detecting implementations' }
 SptSourceWithIndexFactory class >> isAvailable [ 
 
 	^ AlpIndexManager isActive
