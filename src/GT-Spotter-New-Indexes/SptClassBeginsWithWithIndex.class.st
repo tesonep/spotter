@@ -1,3 +1,7 @@
+"
+I am an iterator that uses a generator on top of the Class index of Aleph. 
+I implement the beginsWith search
+"
 Class {
 	#name : #SptClassBeginsWithWithIndex,
 	#superclass : #SptGenericGenerator,

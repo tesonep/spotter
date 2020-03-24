@@ -1,3 +1,10 @@
+"
+I implement a complex filter on top of my inner iterator.
+I will take the filtering text and split it on the spaces, $: and camel case syntax to try to detect all the elements that have those words.
+
+My iterator is query with the first word of the filtering text and the filtering the elements that have all the words in any part. 
+For example, doing the query StoreDisk will answer also DiskStore 
+"
 Class {
 	#name : #SptWordsAwareFilter,
 	#superclass : #SptIteratorDecorator,
@@ -12,7 +19,7 @@ Class {
 SptWordsAwareFilter >> filteringText: aString [
 
 	| firstWord otherWords |
-	words := (aString splitOn: ' ')
+	words := (aString substrings: ' :')
 		flatCollect: [ :each | each splitCamelCase  ].
 	
 	firstWord := words first.

@@ -1,3 +1,6 @@
+"
+I am a test class to measure the impact of the new implementation of spotter processors.
+"
 Class {
 	#name : #BenchProcessors,
 	#superclass : #Object,

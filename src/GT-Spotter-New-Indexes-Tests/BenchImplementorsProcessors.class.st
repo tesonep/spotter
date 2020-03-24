@@ -1,3 +1,6 @@
+"
+I am a test class to measure the speed of the implementation using the indexes.
+"
 Class {
 	#name : #BenchImplementorsProcessors,
 	#superclass : #Object,

@@ -1,3 +1,8 @@
+"
+I am a source factory that uses the indexes.
+
+I will return the classes and implementor sources that uses the AlephIndexes.
+"
 Class {
 	#name : #SptSourceWithIndexFactory,
 	#superclass : #SptSourceFactory,
