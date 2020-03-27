@@ -28,17 +28,17 @@ BaselineOfSpotter >> baseline: spec [
 					with: [ spec requires: #('Tool-Catalog') ];
 				package: 'GT-Spotter-UI' with: [ spec requires: #('GT-Spotter')];
 				package: 'GT-SpotterExtensions-Core' with: [ spec requires: #('GT-Spotter')];
-				package: 'GT-Spotter-New' 
+				package: 'GT-Spotter-Processor' 
 					with: [ spec requires: #('GT-Spotter' 'GT-Spotter-UI' 'GT-SpotterExtensions-Core')];
 
-				package: 'GT-Spotter-New-Tests' with: [ spec requires: #('GT-Spotter-New')];
+				package: 'GT-Tests-Spotter-Processors' with: [ spec requires: #('GT-Spotter-Processor')];
 				package: 'GT-Spotter-New-Indexes' 
-					with: [ spec requires: #('VMTunning' 'Aleph' 'GT-Spotter-New')];
+					with: [ spec requires: #('VMTunning' 'Aleph' 'GT-Spotter-Processor')];
 				package: 'GT-Spotter-New-Indexes-Tests' 
 					with: [ spec requires: #('GT-Spotter-New-Indexes')].
 					
 				spec 
-					group: 'default' with: #('GT-Spotter-New' 'GT-Spotter-New-Tests');
+					group: 'default' with: #('GT-Spotter-Processor' 'GT-Tests-Spotter-Processors');
 					group: 'indexes' with: #('default' 'GT-Spotter-New-Indexes' 'GT-Spotter-New-Indexes-Tests') ]
 ]
 
